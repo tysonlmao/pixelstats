@@ -25,6 +25,16 @@ function formatLastLogin(lastLogin) {
   return `${year}/${month}/${day} ${hours}:${minutes}`;
 }
 
+function formatFirstLogin(firstLogin) {
+  if (isNaN(firstLogin)) {
+    return "Unknown";
+  }
+
+  const date = new Date(firstLogin);
+  const year = date.getFullYear().toString();
+  return year;
+}
+
 function App() {
   const [uuid, setUuid] = useState("");
   const [stats, setStats] = useState(null);
@@ -65,20 +75,21 @@ function App() {
       </div>
       <div className="container stats">
         {!stats ? (
-          <div className="search-form">
+          <div className="search-form text-end"> {/* Modified CSS class */}
             <input
               type="text"
               value={uuid}
               onChange={(e) => setUuid(e.target.value)}
               placeholder="Enter UUID"
             />
-            <button onClick={getStats}>Get Stats</button>
+            <button onClick={getStats} className="btn btn-primary">Get Stats</button>
           </div>
         ) : (
           <>
             <div className="row">
               <div className="col-md">
                 <h2>{stats.player.displayname}</h2>
+                <h3>Joined in {formatFirstLogin(stats.player.firstLogin)}</h3>
               </div>
               <div className="col-md text-md-end">
                 <h3>{formatKarma(stats.player.karma)} KARMA</h3>

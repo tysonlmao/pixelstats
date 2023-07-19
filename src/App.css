@@ -18,6 +18,10 @@ h3 {
   font-family: "Quinquefive", system-ui;
 }
 
+.buttons {
+  border: 5px solid #ff9b9b;
+}
+
 .custom-header {
   margin-top: 2rem;
   padding: 5rem;
@@ -43,4 +47,45 @@ h3 {
   .App {
     width: 95vw;
   }
+
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .search-form input[type="text"] {
+    margin-bottom: 10px;
+  }
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.search-form input[type="text"] {
+  flex: 1;
+  border: 5px solid #ff9b9b;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.search-form button {
+  margin-left: 10px;
+  border: 5px solid #ff9b9b;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fc8181;
+  color: #fff;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #fc8181;
+  border: 5px solid white;
 }
