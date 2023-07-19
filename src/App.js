@@ -40,14 +40,15 @@ function Footer({ commitId }) {
     <footer className="text-center mt-5">
       <p>
         made by <a href="https://tysonlmao.dev">tysonlmao.dev</a> •{' '}
-        <a href="https://github.com/tysonlmao/pixelstats">{commitId}</a>
+        <a href={`https://github.com/tysonlmao/pixelstats/commit/${commitId}`}>
+          {commitId}
+        </a>
       </p>
     </footer>
   );
 }
 
-export default function App() {
-  const [username, setUsername] = useState("");
+function App() {
   const [uuid, setUuid] = useState("");
   const [stats, setStats] = useState(null);
   const [commitId, setCommitId] = useState('');
@@ -58,6 +59,7 @@ export default function App() {
   const getStats = async () => {
     try {
       const res = await axios.get(API_URL);
+
       if (res.data.success) {
         const data = res.data;
         console.log(data);
@@ -65,30 +67,8 @@ export default function App() {
       } else {
         setStats(null);
       }
-    } catch (error) {
-      console.log(error);
+    } catch {
       setStats(null);
-    }
-  };
-
-  const getUUID = async () => {
-    try {
-      const response = await axios.get(`https://api.mojang.com/users/profiles/minecraft/${encodeURIComponent(username)}`);
-      if (response.data && response.data.id) {
-        setUuid(response.data.id);
-      } else {
-        setUuid("");
-      }
-    } catch (error) {
-      console.log(error);
-      setUuid("");
-    }
-  };
-
-  const handleSearch = () => {
-    if (username) {
-      getUUID();
-      getStats();
     }
   };
 
@@ -120,42 +100,39 @@ export default function App() {
         </div>
       </div>
       <div className="container stats">
-        {!uuid && (
+        {!stats ? (
           <div className="search-form text-end">
             <input
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
+              value={uuid}
+              onChange={(e) => setUuid(e.target.value)}
+              placeholder="Enter UUID"
             />
-            <button onClick={handleSearch} className="btn btn-primary">
+            <button onClick={getStats} className="btn btn-primary">
               Get Stats
             </button>
           </div>
+        ) : (
+          <>
+            <div className="row">
+              <div className="col-md">
+                <h2>{stats.player.displayname}</h2>
+                <h3>Joined in {formatFirstLogin(stats.player.firstLogin)}</h3>
+              </div>
+              <div className="col-md text-md-end">
+                <h3>{formatKarma(stats.player.karma)} KARMA</h3>
+                <h3>{stats.player.achievementPoints} AP</h3>
+                {isNaN(stats.player.lastLogin) ? null : (
+                  <h3>{formatLastLogin(stats.player.lastLogin)} last login</h3>
+                )}
+              </div>
+            </div>
+          </>
         )}
-        {uuid && !stats ? (
-          <div className="loading-message">
-            <p>Loading stats...</p>
-          </div>
-        ) : null}
-        {stats ? (
-          <div className="row">
-            <div className="col-md">
-              <h2>{stats.player.displayname}</h2>
-              <h3>Joined in {formatFirstLogin(stats.player.firstLogin)}</h3>
-            </div>
-            <div className="col-md text-md-end">
-              <h3>{formatKarma(stats.player.karma)} KARMA</h3>
-              <h3>{stats.player.achievementPoints} AP</h3>
-              {isNaN(stats.player.lastLogin) ? null : (
-                <h3>{formatLastLogin(stats.player.lastLogin)} last login</h3>
-              )}
-            </div>
-          </div>
-        ) : null}
       </div>
       <Footer commitId={commitId} />
     </div>
   );
 }
 
+export default App;
