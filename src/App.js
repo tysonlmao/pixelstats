@@ -35,6 +35,35 @@ function formatFirstLogin(firstLogin) {
   return year;
 }
 
+function Footer() {
+  const [commitId, setCommitId] = useState('');
+
+  useEffect(() => {
+    // Fetch the commit ID from the GitHub API
+    const fetchCommitId = async () => {
+      try {
+        const response = await axios.get(
+          'https://api.github.com/repos/tysonlmao/pixelstats/commits'
+        );
+        if (response.data.length > 0) {
+          const latestCommit = response.data[0];
+          setCommitId(latestCommit.sha.substring(0, 7));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCommitId();
+  }, []);
+
+  return (
+    <footer>
+      <p>made by <a href="https://tysonlmao.dev">tysonlmao.dev</a> • <a href="https://github.com/tysonlmao/pixelstats">{commitId}</a></p>
+    </footer>
+  );
+}
+
 function App() {
   const [uuid, setUuid] = useState("");
   const [stats, setStats] = useState(null);
@@ -45,7 +74,6 @@ function App() {
   const getStats = async () => {
     try {
       const res = await axios.get(API_URL);
-
       if (res.data.success) {
         const data = res.data;
         console.log(data);
@@ -53,7 +81,8 @@ function App() {
       } else {
         setStats(null);
       }
-    } catch {
+    } catch (error) {
+      console.log(error);
       setStats(null);
     }
   };
@@ -75,14 +104,16 @@ function App() {
       </div>
       <div className="container stats">
         {!stats ? (
-          <div className="search-form text-end"> {/* Modified CSS class */}
+          <div className="search-form text-end">
             <input
               type="text"
               value={uuid}
               onChange={(e) => setUuid(e.target.value)}
               placeholder="Enter UUID"
             />
-            <button onClick={getStats} className="btn btn-primary">Get Stats</button>
+            <button onClick={getStats} className="btn btn-primary">
+              Get Stats
+            </button>
           </div>
         ) : (
           <>
@@ -102,6 +133,7 @@ function App() {
           </>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
