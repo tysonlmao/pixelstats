@@ -39,8 +39,8 @@ function Footer({ commitId }) {
   return (
     <footer className="text-center mt-5">
       <p>
-        made by <a href="https://tysonlmao.dev">tysonlmao.dev</a> •{' '}
-        <a href={`https://github.com/tysonlmao/pixelstats/commit/${commitId}`}>
+        made by <a target="_blank" href="https://tysonlmao.dev">tysonlmao.dev</a> •{' '}
+        <a target="_blank" href={`https://github.com/tysonlmao/pixelstats/commit/${commitId}`}>
           {commitId}
         </a>
       </p>
