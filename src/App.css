@@ -1,10 +1,46 @@
 h1,
 h2,
-h3,
 h4,
 h5,
 h6,
 p {
   margin: 0;
   color: #f4eee0;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+.stats {
+  margin-top: 2rem;
+  color: #ff9b9b;
+  font-family: "Quinquefive", system-ui;
+}
+
+.custom-header {
+  margin-top: 2rem;
+  padding: 5rem;
+  border: 5px solid #ff9b9b;
+  background-image: url("../public/images/pexels-tobias-bjørkli-1819650.jpg");
+  background-position: center;
+  border-radius: 10px;
+}
+
+.custom-header > h2 {
+  font-family: "VCR OSD Mono";
+  font-size: 4rem;
+  background-color: unset;
+  color: #ff9b9b;
+}
+
+.App {
+  width: 50vw;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 700px) {
+  .App {
+    width: 95vw;
+  }
 }
