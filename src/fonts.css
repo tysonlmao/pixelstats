@@ -7,3 +7,8 @@
   font-family: "Quinquefive";
   src: url("../public/fonts/QuinqueFive.ttf");
 }
+
+@font-face {
+  font-family: "Jetbrains Mono";
+  src: url("../public/fonts/JetBrainsMono[wght].ttf");
+}

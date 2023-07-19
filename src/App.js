@@ -37,7 +37,7 @@ function formatFirstLogin(firstLogin) {
 
 function Footer({ commitId }) {
   return (
-    <footer>
+    <footer className="text-center mt-5">
       <p>
         made by <a href="https://tysonlmao.dev">tysonlmao.dev</a> •{' '}
         <a href="https://github.com/tysonlmao/pixelstats">{commitId}</a>
