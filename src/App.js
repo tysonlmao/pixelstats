@@ -44,6 +44,7 @@ function Footer({ commitId }) {
           {commitId}
         </a>
       </p>
+
     </footer>
   );
 }
@@ -143,9 +144,12 @@ function App() {
               </div>
               <>
                 <hr />
-                <h3>Game statistics</h3>
                 <div>
                   <h3>Bedwars</h3>
+                  <span className="label">Coins</span>
+                  <h3>{(stats.player.stats.Bedwars.coins).toLocaleString()}</h3>
+                  <span className="label">Winstreak</span>
+                  <h3>{(stats.player.stats.Bedwars.winstreak) | "Unknown"}</h3>
                   {/* 
                     to calculate WLR or KDR use this is an example
                     {Math.round(x / y * 100) / 100}
