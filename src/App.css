@@ -61,7 +61,7 @@ footer a:hover {
 
 @media screen and (max-width: 700px) {
   .App {
-    width: 95vw;
+    width: 100vw;
   }
 
   .search-form {

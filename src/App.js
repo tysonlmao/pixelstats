@@ -126,14 +126,54 @@ function App() {
                   <h3 className="mt-1">{formatKarma(stats.player.karma)}</h3>
                   <span className="label">Achievement Points</span>
                   <h3>{stats.player.achievementPoints.toLocaleString()}</h3>
+                  {isNaN(stats.player.firstLogin) ? null : (
+                    <>
+                      <span className="label">First login</span>
+                      <h3>{formatLastLogin(stats.player.firstLogin)}</h3>
+                    </>
+                  )}
                   {isNaN(stats.player.lastLogin) ? null : (
                     <>
                       <span className="label">Last login</span>
                       <h3>{formatLastLogin(stats.player.lastLogin)}</h3>
                     </>
                   )}
+
                 </div>
               </div>
+              <>
+                <hr />
+                <h3>Game statistics</h3>
+                <div>
+                  <h3>Bedwars</h3>
+                  {/* 
+                    to calculate WLR or KDR use this is an example
+                    {Math.round(x / y * 100) / 100}
+                  */}
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Final Kills</th>
+                        <th scope="col">Deaths</th>
+                        <th scope="col">KDR</th>
+                        <th scope="col">Wins</th>
+                        <th scope="col">Losses</th>
+                        <th scope="col">WLR</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Solo</th>
+                        <th scope="col">{stats.player.stats.Bedwars.eight_one_final_kills_bedwars}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.eight_one_final_deaths_bedwars}</th>
+                        <th scope="col">{Math.round(stats.player.stats.Bedwars.eight_one_final_kills_bedwars / stats.player.stats.Bedwars.eight_one_final_deaths_bedwars * 100) / 100}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.eight_one_wins_bedwars}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.eight_one_losses_bedwars}</th>
+                        <th scope="col">{Math.round(stats.player.stats.Bedwars.eight_one_wins_bedwars / stats.player.stats.Bedwars.eight_one_losses_bedwars * 100) / 100}</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </>
             </div>
           </>
         )}
