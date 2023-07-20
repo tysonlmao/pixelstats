@@ -44,6 +44,9 @@ function Footer({ commitId }) {
           {commitId}
         </a>
       </p>
+      <p>
+        <a href="https://discord.gg/SQD7yvuZ23">Join the discord</a>
+      </p>
 
     </footer>
   );
