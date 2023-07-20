@@ -80,6 +80,12 @@ table {
   }
 }
 
+@media screen and (max-width: 1300px) {
+  .App {
+    width: 100vw;
+  }
+}
+
 .search-form {
   display: flex;
   align-items: center;
