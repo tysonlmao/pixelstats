@@ -114,17 +114,25 @@ function App() {
           </div>
         ) : (
           <>
-            <div className="row">
-              <div className="col-md">
+            <div className="roboto-mono">
+              <div className="quinquefive">
                 <h2>{stats.player.displayname}</h2>
                 <h3>Joined in {formatFirstLogin(stats.player.firstLogin)}</h3>
               </div>
-              <div className="col-md text-md-end">
-                <h3>{formatKarma(stats.player.karma)} KARMA</h3>
-                <h3>{stats.player.achievementPoints} AP</h3>
-                {isNaN(stats.player.lastLogin) ? null : (
-                  <h3>{formatLastLogin(stats.player.lastLogin)} last login</h3>
-                )}
+              <div className="row">
+                <div className="col">
+                  <hr />
+                  <span className="label">Karma</span>
+                  <h3 className="mt-1">{formatKarma(stats.player.karma)}</h3>
+                  <span className="label">Achievement Points</span>
+                  <h3>{stats.player.achievementPoints.toLocaleString()}</h3>
+                  {isNaN(stats.player.lastLogin) ? null : (
+                    <>
+                      <span className="label">Last login</span>
+                      <h3>{formatLastLogin(stats.player.lastLogin)}</h3>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </>
