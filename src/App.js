@@ -1,6 +1,7 @@
 import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Nav from "./components/nav";
 
 function formatKarma(karma) {
   const million = 1000000;
@@ -101,6 +102,7 @@ function App() {
     <div className="App">
       <div className="nav">
         <div className="container">
+          <Nav />
           <header className="custom-header text-uppercase text-center">
             <h2>Stats</h2>
           </header>

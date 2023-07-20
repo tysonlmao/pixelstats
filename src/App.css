@@ -28,11 +28,6 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* tables */
-table {
-  background-color: #001c30;
-}
-
 .stats {
   margin-top: 2rem;
   color: #ff9b9b;
@@ -44,7 +39,7 @@ table {
 }
 
 .custom-header {
-  margin-top: 2rem;
+  margin-top: 1rem;
   padding: 5rem;
   border: 3px solid #ff9b9b;
   background-image: url("../public/images/ivana-cajina-asuyh-_ZX54-unsplash.jpg");
@@ -60,7 +55,7 @@ table {
 }
 
 .App {
-  width: 50vw;
+  width: 75vw;
   margin: 0 auto;
 }
 
