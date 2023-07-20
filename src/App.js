@@ -2,6 +2,7 @@ import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+// format the karma count
 function formatKarma(karma) {
   const million = 1000000;
   if (karma >= million) {
@@ -11,6 +12,7 @@ function formatKarma(karma) {
   return karma.toLocaleString();
 }
 
+// format last login
 function formatLastLogin(lastLogin) {
   if (isNaN(lastLogin)) {
     return "Unknown";
@@ -53,7 +55,7 @@ function App() {
   const [stats, setStats] = useState(null);
   const [commitId, setCommitId] = useState('');
 
-  const API_KEY = "8dcd98de-b58f-4f7a-a54f-a42e1084f326";
+  const API_KEY = "6f7a8856-96eb-4c94-bea7-b75a8408b148";
   const API_URL = `https://api.hypixel.net/player?uuid=${uuid}&key=${API_KEY}`;
 
   const getStats = async () => {
@@ -122,8 +124,10 @@ function App() {
               <div className="row">
                 <div className="col">
                   <hr />
-                  <h3 className="mt-1">{formatKarma(stats.player.karma)} KARMA</h3>
-                  <h3>{stats.player.achievementPoints.toLocaleString()} AP</h3>
+                  <span className="label">Karma</span>
+                  <h3 className="mt-1">{formatKarma(stats.player.karma)}</h3>
+                  <span className="label">Achievement Points</span>
+                  <h3>{stats.player.achievementPoints.toLocaleString()}</h3>
                   {isNaN(stats.player.lastLogin) ? null : (
                     <>
                       <span className="label">Last login</span>
