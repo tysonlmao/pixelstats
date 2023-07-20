@@ -15,3 +15,12 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0; /* Add this line to remove the default margin */
 }
+
+.accordion-body-pixel {
+  padding: 0 !important;
+  color: #ff9b9b;
+}
+
+.accordion-body-text {
+  padding: 1rem;
+}
