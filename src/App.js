@@ -50,19 +50,22 @@ function Footer({ commitId }) {
 }
 
 function App() {
-  const [uuid, setUuid] = useState("");
+  const [username, setUsername] = useState("");
   const [stats, setStats] = useState(null);
   const [commitId, setCommitId] = useState('');
 
   const API_KEY = "8dcd98de-b58f-4f7a-a54f-a42e1084f326";
-  const API_URL = `https://api.hypixel.net/player?uuid=${uuid}&key=${API_KEY}`;
+  const ASHCON_API_URL = `https://api.ashcon.app/mojang/v2/user/${username}`;
+  const HYPIXEL_API_URL = `https://api.hypixel.net/player?key=${API_KEY}`;
 
   const getStats = async () => {
     try {
-      const res = await axios.get(API_URL);
+      const ashconResponse = await axios.get(ASHCON_API_URL);
+      const uuid = ashconResponse.data.uuid;
 
-      if (res.data.success) {
-        const data = res.data;
+      const hypixelResponse = await axios.get(`${HYPIXEL_API_URL}&uuid=${uuid}`);
+      if (hypixelResponse.data.success) {
+        const data = hypixelResponse.data;
         console.log(data);
         setStats(data);
       } else {
@@ -105,9 +108,9 @@ function App() {
           <div className="search-form text-end">
             <input
               type="text"
-              value={uuid}
-              onChange={(e) => setUuid(e.target.value)}
-              placeholder="Enter UUID"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter username"
             />
             <button onClick={getStats} className="btn btn-primary">
               Get Stats
