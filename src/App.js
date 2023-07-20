@@ -162,6 +162,24 @@ function App() {
                         <th scope="col">WLR</th>
                       </tr>
                       <tr>
+                        <th scope="col">Overall</th>
+                        <th scope="col">{stats.player.stats.Bedwars.final_kills_bedwars}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.final_deaths_bedwars}</th>
+                        <th scope="col">{Math.round(stats.player.stats.Bedwars.final_kills_bedwars / stats.player.stats.Bedwars.final_deaths_bedwars * 100) / 100}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.wins_bedwars}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.losses_bedwars}</th>
+                        <th scope="col">{Math.round(stats.player.stats.Bedwars.wins_bedwars / stats.player.stats.Bedwars.losses_bedwars * 100) / 100}</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Solo</th>
+                        <th scope="col">{stats.player.stats.Bedwars.eight_one_final_kills_bedwars}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.eight_one_final_deaths_bedwars}</th>
+                        <th scope="col">{Math.round(stats.player.stats.Bedwars.eight_one_final_kills_bedwars / stats.player.stats.Bedwars.eight_one_final_deaths_bedwars * 100) / 100}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.eight_one_wins_bedwars}</th>
+                        <th scope="col">{stats.player.stats.Bedwars.eight_one_losses_bedwars}</th>
+                        <th scope="col">{Math.round(stats.player.stats.Bedwars.eight_one_wins_bedwars / stats.player.stats.Bedwars.eight_one_losses_bedwars * 100) / 100}</th>
+                      </tr>
+                      <tr>
                         <th scope="col">Solo</th>
                         <th scope="col">{stats.player.stats.Bedwars.eight_one_final_kills_bedwars}</th>
                         <th scope="col">{stats.player.stats.Bedwars.eight_one_final_deaths_bedwars}</th>
