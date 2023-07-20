@@ -111,16 +111,20 @@ function App() {
       <div className="container stats">
         {!stats ? (
           <div className="search-form text-end">
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
-            />
-            <button onClick={getStats} className="btn btn-primary">
-              Get Stats
-            </button>
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter username"
+              />
+              <button onClick={getStats} className="btn btn-primary" type="button">
+                <i className="bi bi-search"></i>
+              </button>
+            </div>
           </div>
+
         ) : (
           <>
             <div className="roboto-mono">
