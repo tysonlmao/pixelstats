@@ -28,6 +28,11 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* tables */
+table {
+  background-color: #001c30;
+}
+
 .stats {
   margin-top: 2rem;
   color: #ff9b9b;
