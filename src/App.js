@@ -110,28 +110,20 @@ function App() {
       </div>
       <div className="container stats">
         {!stats ? (
-          <>
-            <div className="row">
-              <div className="col-6"></div>
-              <div className="col-6">
-                <div className="search-form text-end">
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      placeholder="Enter username"
-                    />
-                    <button onClick={getStats} className="btn btn-primary" type="button">
-                      <i className="bi bi-search"></i>
-                    </button>
-                  </div>
-                </div>
-
-              </div>
+          <div className="search-form text-end">
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter username"
+              />
+              <button onClick={getStats} className="btn btn-primary" type="button">
+                <i className="bi bi-search"></i>
+              </button>
             </div>
-          </>
+          </div>
 
         ) : (
           <>
@@ -141,22 +133,24 @@ function App() {
                 <h3>Joined in {formatFirstLogin(stats.player.firstLogin)}</h3>
               </div>
               <div className="row">
-                <div className="col-6 col-sm-12"></div>
-                <div className="col-6">
-                  <div className="search-form text-end">
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Enter username"
-                      />
-                      <button onClick={getStats} className="btn btn-primary" type="button">
-                        <i className="bi bi-search"></i>
-                      </button>
-                    </div>
-                  </div>
+                <div className="col">
+                  <hr />
+                  <span className="label">Karma</span>
+                  <h3 className="mt-1">{formatKarma(stats.player.karma)}</h3>
+                  <span className="label">Achievement Points</span>
+                  <h3>{stats.player.achievementPoints.toLocaleString()}</h3>
+                  {isNaN(stats.player.firstLogin) ? null : (
+                    <>
+                      <span className="label">First login</span>
+                      <h3>{formatLastLogin(stats.player.firstLogin)}</h3>
+                    </>
+                  )}
+                  {isNaN(stats.player.lastLogin) ? null : (
+                    <>
+                      <span className="label">Last login</span>
+                      <h3>{formatLastLogin(stats.player.lastLogin)}</h3>
+                    </>
+                  )}
                 </div>
               </div>
               <>
