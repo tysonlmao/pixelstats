@@ -24,15 +24,26 @@ def get_hypixel_data(uuid):
 
 app = Flask(__name__)
 
-@app.route('/api/', methods=['GET'])
+@app.route('/api/hypixel', methods=['GET'])
 def main_route():
     uuid = request.args.get('uuid')
     data = get_hypixel_data(uuid)
     return data
 
+@app.route('/tea', methods=['GET'])
+def teapot(): 
+    return {"status": "im a teapot"}, 418
+
 @app.route('/', methods=['GET'])
 def why():
-    return {'message': 'why are you here'}
+    return {'message': 'Less speed, more haste.'}
+
+@app.route('/api/webhook', methods=['POST'])
+def github_webhook():
+    if request.headers.get('X-GitHub-Event') == 'push':
+        # Call the deployment script to update the code and restart the server
+        subprocess.Popen(['./deploy.sh'])
+    return 'Webhook received!', 200
 
 if __name__ == '__main__':
     app.run(port=3000)
