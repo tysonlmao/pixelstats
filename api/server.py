@@ -43,7 +43,7 @@ def github_webhook():
     if request.headers.get('X-GitHub-Event') == 'push':
         # Call the deployment script to update the code and restart the server
         subprocess.Popen(['./deploy.sh'])
-        print("Webhook recieved!")
+        print("Webhook recieved! 200")
     return 'Webhook received!', 200
 
 if __name__ == '__main__':
