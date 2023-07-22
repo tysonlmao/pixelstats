@@ -58,7 +58,7 @@ function App() {
   const [stats, setStats] = useState(null);
   const [commitId, setCommitId] = useState('');
 
-  const API_KEY = "8dcd98de-b58f-4f7a-a54f-a42e1084f326";
+  const API_KEY = "f6164dd4-4aba-4082-b499-0b104ec0673c";
   const ASHCON_API_URL = `https://api.ashcon.app/mojang/v2/user/${username}`;
   const HYPIXEL_API_URL = `https://api.hypixel.net/player?key=${API_KEY}`;
 
@@ -154,106 +154,85 @@ function App() {
                 </div>
               </div>
               <>
-                <hr />
                 {/* 
                   start of bedwars accordion
                 */}
-                <div className="accordion" id="bedwarsAccordion">
-                  <div className="accordion-item">
-                    <h2 className="accordion-header" id="bedwarsHeading">
-                      <button
-                        className="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseBedwars"
-                        aria-expanded="false"
-                        aria-controls="collapseBedwars"
-                      >
-                        Bedwars
-                      </button>
-                    </h2>
-                    <div
-                      id="collapseBedwars"
-                      className="accordion-collapse collapse"
-                      aria-labelledby="bedwarsHeading"
-                      data-bs-parent="#bedwarsAccordion"
-                    >
-                      <div className="accordion-body accordion-body-pixel">
-                        <div className="accordion-body-text">
-                          <span className="label">Coins</span>
-                          <h3>{stats.player.stats.Bedwars.coins.toLocaleString()}</h3>
-                          <span className="label">Winstreak</span>
-                          <h3>{stats.player.stats.Bedwars.winstreak || "Unknown"}</h3>
-                          <span className="label">Level</span>
-                          <h3>???</h3>
-                        </div>
+                <div>
+                  <div>
+                    <hr />
+                    <h2>Bedwars</h2>
+                    <span className="label">Coins</span>
+                    <h3>{stats.player.stats.Bedwars.coins.toLocaleString()}</h3>
+                    <span className="label">Winstreak</span>
+                    <h3>{stats.player.stats.Bedwars.winstreak || "Unknown"}</h3>
+                    <span className="label">Level</span>
+                    <h3>???</h3>
+                  </div>
 
-                        <div className="pixel-tables">
-                          <table className="table">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Final Kills</th>
-                                <th scope="col">Deaths</th>
-                                <th scope="col">KDR</th>
-                                <th scope="col">Wins</th>
-                                <th scope="col">Losses</th>
-                                <th scope="col">WLR</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">Overall</th>
-                                <td>{stats.player.stats.Bedwars.final_kills_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.final_deaths_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.final_kills_bedwars / stats.player.stats.Bedwars.final_deaths_bedwars) * 100) / 100}</td>
-                                <td>{stats.player.stats.Bedwars.wins_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.losses_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.wins_bedwars / stats.player.stats.Bedwars.losses_bedwars) * 100) / 100}</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Solo</th>
-                                <td>{stats.player.stats.Bedwars.eight_one_final_kills_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.eight_one_final_deaths_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.eight_one_final_kills_bedwars / stats.player.stats.Bedwars.eight_one_final_deaths_bedwars) * 100) / 100}</td>
-                                <td>{stats.player.stats.Bedwars.eight_one_wins_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.eight_one_losses_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.eight_one_wins_bedwars / stats.player.stats.Bedwars.eight_one_losses_bedwars) * 100) / 100}</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Doubles</th>
-                                <td>{stats.player.stats.Bedwars.eight_two_final_kills_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.eight_two_final_deaths_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.eight_two_final_kills_bedwars / stats.player.stats.Bedwars.eight_two_final_deaths_bedwars) * 100) / 100}</td>
-                                <td>{stats.player.stats.Bedwars.eight_two_wins_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.eight_two_losses_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.eight_two_wins_bedwars / stats.player.stats.Bedwars.eight_two_losses_bedwars) * 100) / 100}</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Threes</th>
-                                <td>{stats.player.stats.Bedwars.four_three_final_kills_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.four_three_final_deaths_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.four_three_final_kills_bedwars / stats.player.stats.Bedwars.four_three_final_deaths_bedwars) * 100) / 100}</td>
-                                <td>{stats.player.stats.Bedwars.four_three_wins_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.four_three_losses_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.four_three_wins_bedwars / stats.player.stats.Bedwars.four_three_losses_bedwars) * 100) / 100}</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Fours</th>
-                                <td>{stats.player.stats.Bedwars.four_four_final_kills_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.four_four_final_deaths_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.four_four_final_kills_bedwars / stats.player.stats.Bedwars.four_four_final_deaths_bedwars) * 100) / 100}</td>
-                                <td>{stats.player.stats.Bedwars.four_four_wins_bedwars}</td>
-                                <td>{stats.player.stats.Bedwars.four_four_losses_bedwars}</td>
-                                <td>{Math.round((stats.player.stats.Bedwars.four_four_wins_bedwars / stats.player.stats.Bedwars.four_four_losses_bedwars) * 100) / 100}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="pixel-tables">
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Final Kills</th>
+                          <th scope="col">Deaths</th>
+                          <th scope="col">KDR</th>
+                          <th scope="col">Wins</th>
+                          <th scope="col">Losses</th>
+                          <th scope="col">WLR</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Overall</th>
+                          <td>{stats.player.stats.Bedwars.final_kills_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.final_deaths_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.final_kills_bedwars / stats.player.stats.Bedwars.final_deaths_bedwars) * 100) / 100}</td>
+                          <td>{stats.player.stats.Bedwars.wins_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.losses_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.wins_bedwars / stats.player.stats.Bedwars.losses_bedwars) * 100) / 100}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Solo</th>
+                          <td>{stats.player.stats.Bedwars.eight_one_final_kills_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.eight_one_final_deaths_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.eight_one_final_kills_bedwars / stats.player.stats.Bedwars.eight_one_final_deaths_bedwars) * 100) / 100}</td>
+                          <td>{stats.player.stats.Bedwars.eight_one_wins_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.eight_one_losses_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.eight_one_wins_bedwars / stats.player.stats.Bedwars.eight_one_losses_bedwars) * 100) / 100}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Doubles</th>
+                          <td>{stats.player.stats.Bedwars.eight_two_final_kills_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.eight_two_final_deaths_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.eight_two_final_kills_bedwars / stats.player.stats.Bedwars.eight_two_final_deaths_bedwars) * 100) / 100}</td>
+                          <td>{stats.player.stats.Bedwars.eight_two_wins_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.eight_two_losses_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.eight_two_wins_bedwars / stats.player.stats.Bedwars.eight_two_losses_bedwars) * 100) / 100}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Threes</th>
+                          <td>{stats.player.stats.Bedwars.four_three_final_kills_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.four_three_final_deaths_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.four_three_final_kills_bedwars / stats.player.stats.Bedwars.four_three_final_deaths_bedwars) * 100) / 100}</td>
+                          <td>{stats.player.stats.Bedwars.four_three_wins_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.four_three_losses_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.four_three_wins_bedwars / stats.player.stats.Bedwars.four_three_losses_bedwars) * 100) / 100}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Fours</th>
+                          <td>{stats.player.stats.Bedwars.four_four_final_kills_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.four_four_final_deaths_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.four_four_final_kills_bedwars / stats.player.stats.Bedwars.four_four_final_deaths_bedwars) * 100) / 100}</td>
+                          <td>{stats.player.stats.Bedwars.four_four_wins_bedwars}</td>
+                          <td>{stats.player.stats.Bedwars.four_four_losses_bedwars}</td>
+                          <td>{Math.round((stats.player.stats.Bedwars.four_four_wins_bedwars / stats.player.stats.Bedwars.four_four_losses_bedwars) * 100) / 100}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
+
               </>
             </div>
           </>
