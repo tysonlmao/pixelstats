@@ -62,6 +62,7 @@ function App() {
   const ASHCON_API_URL = `https://api.ashcon.app/mojang/v2/user/${username}`;
   const HYPIXEL_API_URL = `https://api.hypixel.net/player?key=${API_KEY}`;
 
+  // eslint-disable-next-line
   const getStats = async () => {
     try {
       console.log("CONTACTING ASHCON API PLEASE WAIT");
