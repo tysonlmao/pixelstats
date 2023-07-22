@@ -46,4 +46,4 @@ def github_webhook():
     return 'Webhook received!', 200
 
 if __name__ == '__main__':
-    app.run(port=3000)
+    app.run(port=80)
