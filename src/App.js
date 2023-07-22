@@ -115,16 +115,20 @@ function App() {
         {!stats ? (
           <div className="search-form text-end">
             <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter username"
-              />
-              <button onClick={getStats} className="btn btn-primary" type="button">
-                <i className="bi bi-search"></i>
-              </button>
+              <>
+                <div class="input-group">
+                  <input type="text"
+                    className="form-control input-pixel text-white"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="" />
+                  <div class="input-group-append">
+                    <button class="btn btn-primary input-pixel" type="button">
+                      <i class="bi bi-search input-pixel"></i> Search
+                    </button>
+                  </div>
+                </div>
+              </>
             </div>
           </div>
 
@@ -260,7 +264,6 @@ function App() {
                           <th scope="col">Kills</th>
                           <th scope="col">Deaths</th>
                           <th scope="col">KDR</th>
-                          <th scope="col">Deaths</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -268,6 +271,10 @@ function App() {
                           <th scope="row">Overall</th>
                           <th>{stats.player.stats.Duels.wins}</th>
                           <th>{stats.player.stats.Duels.losses}</th>
+                          <th>{Math.round((stats.player.stats.Duels.wins / stats.player.stats.Duels.losses) * 100) / 100}</th>
+                          <th>{stats.player.stats.Duels.kills}</th>
+                          <th>{stats.player.stats.Duels.deaths}</th>
+                          <th>{Math.round((stats.player.stats.Duels.kills / stats.player.stats.Duels.deaths) * 100) / 100}</th>
                         </tr>
                       </tbody>
                     </table>
