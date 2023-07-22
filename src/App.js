@@ -64,9 +64,11 @@ function App() {
 
   const getStats = async () => {
     try {
+      console.log("CONTACTING ASHCON API PLEASE WAIT");
       const ashconResponse = await axios.get(ASHCON_API_URL);
       const uuid = ashconResponse.data.uuid;
-
+      console.log(`searching for ${uuid}`);
+      console.log("CONTACTING HYPIXEL API");
       const hypixelResponse = await axios.get(`${HYPIXEL_API_URL}&uuid=${uuid}`);
       if (hypixelResponse.data.success) {
         const data = hypixelResponse.data;
@@ -85,6 +87,7 @@ function App() {
       const response = await axios.get(
         'https://api.github.com/repos/tysonlmao/pixelstats/commits'
       );
+      console.log(response);
       if (response.data.length > 0) {
         const latestCommit = response.data[0];
         setCommitId(latestCommit.sha.substring(0, 7));
@@ -153,9 +156,13 @@ function App() {
                   )}
                 </div>
               </div>
+              {/* 
+                {Math.round((x / y) * 100) / 100}
+                when you need to calculate fkdr or wlr
+              */}
               <>
                 {/* 
-                  start of bedwars accordion
+                  start of bedwars section
                 */}
                 <div>
                   <div>
@@ -232,7 +239,40 @@ function App() {
                     </table>
                   </div>
                 </div>
-
+                {/* 
+                  start of the duels section
+                */}
+                <div>
+                  <hr />
+                  <h2>Duels</h2>
+                  <span className="label">Coins</span>
+                  <h3>{stats.player.stats.Duels.coins.toLocaleString()}</h3>
+                  <span className="label">Winstreak</span>
+                  <h3>{stats.player.stats.Duels.current_overall_winstreak || "Unknown"}</h3>
+                  <div className="pixel-tables">
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Wins</th>
+                          <th scope="col">Losses</th>
+                          <th scope="col">WLR</th>
+                          <th scope="col">Kills</th>
+                          <th scope="col">Deaths</th>
+                          <th scope="col">KDR</th>
+                          <th scope="col">Deaths</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Overall</th>
+                          <th>{stats.player.stats.Duels.wins}</th>
+                          <th>{stats.player.stats.Duels.losses}</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </>
             </div>
           </>
