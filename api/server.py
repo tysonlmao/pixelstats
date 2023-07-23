@@ -2,10 +2,13 @@ import requests
 import json
 from datetime import datetime
 from flask import Flask, request
+from tinydb import TinyDB, Query
 import random
 import os
 
 config_file_path = 'config.json'
+players = TinyDB('../database/players.json')
+
 with open(config_file_path, 'r') as config_file:
     config_data = json.load(config_file)
     hypixel_api_key = config_data.get('HYPIXEL_API_KEY')
@@ -21,20 +24,38 @@ def get_hypixel_data(uuid):
 
     ip = request.remote_addr
     print(f"{ip} Fetched data for {json_data.get('player', {}).get('displayname')}")
+    Player = Query()
+    existing_player = players.get(Player.player.uuid == uuid)
 
     if raw_data.status_code != 200:
         print(f"Failed to retrieve data for UUID {uuid}. Error {raw_data.status_code}.")
         return
 
+    if existing_player is not None:
+        print(f"Player already exists: {json_data['player']['displayname']}")
+        return json_data
+
+    # Create an entry in the players database
+    current_time = datetime.now()
+    timestamp = current_time.strftime("%Y-%m-%d %H:%M:%S")
+
+    players.insert({'player': {
+        "uuid": uuid,
+        "timestamp": timestamp
+    }})
+
     return json_data
 
 app = Flask(__name__)
 
-@app.route('/api/hypixel', methods=['GET'])
+# send requests to this address as a proxy server
+@app.route('/requests', methods=['GET'])
 def main_route():
     uuid = request.args.get('uuid')
     data = get_hypixel_data(uuid)
     return data
+
+@app.route('/api/players')
 
 @app.route('/tea', methods=['GET'])
 def teapot(): 
@@ -60,8 +81,8 @@ def github_webhook():
     if request.headers.get('X-GitHub-Event') == 'push':
         # Call the deployment script to update the code and restart the server
         subprocess.Popen(['./deploy.sh'])
-        print("Webhook recieved! 200")
+        print("Webhook received! 200")
     return 'Webhook received!', 200
 
 if __name__ == '__main__':
-    app.run(port=80)
+    app.run(port=8080)
