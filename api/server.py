@@ -55,8 +55,6 @@ def main_route():
     data = get_hypixel_data(uuid)
     return data
 
-@app.route('/api/players')
-
 @app.route('/tea', methods=['GET'])
 def teapot(): 
     return {"status": "im a teapot"}, 418
@@ -85,4 +83,4 @@ def github_webhook():
     return 'Webhook received!', 200
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run(host='0.0.0.0', port=80)
