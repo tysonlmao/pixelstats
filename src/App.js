@@ -58,17 +58,16 @@ function App() {
   const [stats, setStats] = useState(null);
   const [commitId, setCommitId] = useState('');
 
-  const API_KEY = "f6164dd4-4aba-4082-b499-0b104ec0673c";
+  const API_KEY = "9a7a0d23-ba80-43e7-b4ff-8280ce0ae54b";
   const ASHCON_API_URL = `https://api.ashcon.app/mojang/v2/user/${username}`;
   const HYPIXEL_API_URL = `https://api.hypixel.net/player?key=${API_KEY}`;
-
-  // eslint-disable-next-line
+  //eslint-disable-next-line
   const getStats = async () => {
     try {
-      console.log("CONTACTING ASHCON API PLEASE WAIT");
+      console.log("CONTACTING ASHCON API");
       const ashconResponse = await axios.get(ASHCON_API_URL);
+      console.log(ashconResponse);
       const uuid = ashconResponse.data.uuid;
-      console.log(`searching for ${uuid}`);
       console.log("CONTACTING HYPIXEL API");
       const hypixelResponse = await axios.get(`${HYPIXEL_API_URL}&uuid=${uuid}`);
       if (hypixelResponse.data.success) {
@@ -88,8 +87,8 @@ function App() {
       const response = await axios.get(
         'https://api.github.com/repos/tysonlmao/pixelstats/commits'
       );
-      console.log(response);
       if (response.data.length > 0) {
+        console.log("RECIEVED GITHUB API RESPONSE");
         const latestCommit = response.data[0];
         setCommitId(latestCommit.sha.substring(0, 7));
       }
@@ -117,15 +116,15 @@ function App() {
           <div className="search-form text-end">
             <div className="input-group">
               <>
-                <div class="input-group">
+                <div className="input-group">
                   <input type="text"
                     className="form-control input-pixel text-white"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="" />
-                  <div class="input-group-append">
-                    <button class="btn btn-primary input-pixel" type="button">
-                      <i class="bi bi-search input-pixel"></i> Search
+                  <div className="input-group-append">
+                    <button onClick={getStats} className="btn btn-primary input-pixel" type="button">
+                      Search
                     </button>
                   </div>
                 </div>
