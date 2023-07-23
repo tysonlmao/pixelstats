@@ -117,6 +117,7 @@ function App() {
             <div className="input-group">
               <>
                 <div className="input-group">
+
                   <input type="text"
                     className="form-control input-pixel text-white"
                     value={username}

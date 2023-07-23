@@ -3,6 +3,7 @@ import requests
 import json
 from datetime import datetime
 from flask import Flask, request
+import random
 
 hypixel_api_key = os.environ.get('HYPIXEL_API_KEY')
 
@@ -36,7 +37,18 @@ def teapot():
 
 @app.route('/', methods=['GET'])
 def why():
-    return {'message': 'Less speed, more haste.'}
+    quotes = [
+    "Fail fast, fail cheaply",
+    "Become lazy",
+    "Read the fucking manual",
+    "Target the low hanging fruit",
+    "Be part of the solution",
+    "Do the simple things",
+    "Start simple, get complex",
+    "Don't ice an uncooked cake",
+    "Less haste, more speed"
+  ]
+    return {"message": random.choice(quotes)};
 
 @app.route('/api/webhook', methods=['POST'])
 def github_webhook():
