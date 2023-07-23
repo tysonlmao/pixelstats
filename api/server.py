@@ -1,11 +1,18 @@
-import os
 import requests
 import json
 from datetime import datetime
 from flask import Flask, request
 import random
+import os
 
-hypixel_api_key = os.environ.get('HYPIXEL_API_KEY')
+config_file_path = 'config.json'
+with open(config_file_path, 'r') as config_file:
+    config_data = json.load(config_file)
+    hypixel_api_key = config_data.get('HYPIXEL_API_KEY')
+
+# Check if the key is present
+if not hypixel_api_key:
+    raise ValueError("Hypixel API key is missing in config.json")
 
 def get_hypixel_data(uuid):
     url = f'https://api.hypixel.net/player?key={hypixel_api_key}&uuid={uuid}'
@@ -13,14 +20,12 @@ def get_hypixel_data(uuid):
     json_data = raw_data.json()
 
     ip = request.remote_addr
-    print(f"{ip} Fetched data for {json_data['player']['displayname']}")
+    print(f"{ip} Fetched data for {json_data.get('player', {}).get('displayname')}")
 
     if raw_data.status_code != 200:
         print(f"Failed to retrieve data for UUID {uuid}. Error {raw_data.status_code}.")
         return
 
-    current_time = datetime.now()
-    timestamp = current_time.strftime("%Y-%m-%d %H:%M:%S")
     return json_data
 
 app = Flask(__name__)
