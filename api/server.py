@@ -57,7 +57,7 @@ def main_route():
 
 @app.route('/tea', methods=['GET'])
 def teapot(): 
-    return {"status": "im a teapot"}, 418
+    return {"status": "I\'m a teapot"}, 418
 
 @app.route('/', methods=['GET'])
 def why():
@@ -76,8 +76,7 @@ def why():
 
 @app.route('/api/webhook', methods=['POST'])
 def github_webhook():
-    if request.headers.get('X-GitHub-Event') == 'push':
-        # Call the deployment script to update the code and restart the server
+    if request.headers.get('X-GitHub-Event') == 'release':
         subprocess.Popen(['./deploy.sh'])
         print("Webhook received! 200")
     return 'Webhook received!', 200
