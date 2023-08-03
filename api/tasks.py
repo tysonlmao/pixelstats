@@ -6,6 +6,12 @@ import subprocess
 def track_players():
     with open('players.json', 'r') as json_file:
         data = json_file.read()
+        if data:
+            try:
+                data_fixed = json.loads(data)
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON data: {e}")
+                # Handle the error appropriately, e.g., log, raise an exception, or provide a default value.
         data_fixed = json.loads(data)
         print(data_fixed)
 track_players()
