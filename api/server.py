@@ -3,6 +3,8 @@ import json
 from datetime import datetime
 from flask import Flask, request, jsonify
 from tinydb import TinyDB, Query
+import time
+import threading
 import random
 import os
 from tasks import check_for_updates
@@ -87,6 +89,20 @@ def get_players():
     except FileNotFoundError:
         return jsonify({"error": "players.json not found"}), 404
 
+def updates_interval(interval):
+    while True:
+        check_for_updates()
+        time.sleep(interval)
+        
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=81)
-    check_for_updates()
+    app.run(host='0.0.0.0', port=80)
+
+    interval_seconds = 120
+    update_thread = threading.Thread(target=run_check_for_updates_interval, args=(interval_seconds,))
+    update_thread.daemon = True  # Set the thread as a daemon to terminate when the main thread exits
+    update_thread.start()
+
+    while True:
+        # Your main application logic or server code goes here
+        time.sleep(1) 
