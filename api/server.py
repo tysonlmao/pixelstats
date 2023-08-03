@@ -1,13 +1,15 @@
 import requests
 import json
 from datetime import datetime
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from tinydb import TinyDB, Query
 import random
 import os
 
+from inc.tasks import check_for_updates
+
 config_file_path = 'config.json'
-players = TinyDB('../database/players.json')
+players = TinyDB('./data/players.json')
 
 with open(config_file_path, 'r') as config_file:
     config_data = json.load(config_file)
@@ -54,6 +56,7 @@ def main_route():
     uuid = request.args.get('uuid')
     data = get_hypixel_data(uuid)
     return data
+    
 
 @app.route('/tea', methods=['GET'])
 def teapot(): 
@@ -74,12 +77,17 @@ def why():
   ]
     return {"message": random.choice(quotes)};
 
-@app.route('/api/webhook', methods=['POST'])
-def github_webhook():
-    if request.headers.get('X-GitHub-Event') == 'release':
-        subprocess.Popen(['./deploy.sh'])
-        print("Webhook received! 200")
-    return 'Webhook received!', 200
+@app.route('/api/players', methods=['GET'])
+def get_players():
+    try:
+        with open('./data/players.json', 'r') as json_file:
+            data = json_file.read()
+            data_fixed = json.loads(data)
+            pretty_json_string = json.dumps(data_fixed, indent=4)
+        return jsonify(json.loads(pretty_json_string))
+    except FileNotFoundError:
+        return jsonify({"error": "players.json not found"}), 404
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
+    check_for_updates()
