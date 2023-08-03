@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify
 from tinydb import TinyDB, Query
 import random
 import os
-
 from inc.tasks import check_for_updates
 
 config_file_path = 'config.json'
