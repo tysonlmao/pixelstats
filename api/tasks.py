@@ -4,7 +4,7 @@ import json
 import subprocess
 
 def track_players():
-    with open('../players.json', 'r') as json_file:
+    with open('players.json', 'r') as json_file:
         data = json_file.read()
         data_fixed = json.loads(data)
         print(data_fixed)

@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 from tinydb import TinyDB, Query
 import random
 import os
-from inc.tasks import check_for_updates
+from tasks import check_for_updates
 
 config_file_path = 'config.json'
 players = TinyDB('players.json')
@@ -88,5 +88,5 @@ def get_players():
         return jsonify({"error": "players.json not found"}), 404
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=81)
     check_for_updates()
