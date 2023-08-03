@@ -8,7 +8,6 @@ def track_players():
         data = json_file.read()
         # todo
         # handle if file is empty/does not exist
-        print(data_fixed)
 track_players()
 
 def check_for_updates():
