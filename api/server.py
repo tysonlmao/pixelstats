@@ -8,7 +8,7 @@ import os
 from inc.tasks import check_for_updates
 
 config_file_path = 'config.json'
-players = TinyDB('./data/players.json')
+players = TinyDB('players.json')
 
 with open(config_file_path, 'r') as config_file:
     config_data = json.load(config_file)
@@ -79,7 +79,7 @@ def why():
 @app.route('/api/players', methods=['GET'])
 def get_players():
     try:
-        with open('./data/players.json', 'r') as json_file:
+        with open('players.json', 'r') as json_file:
             data = json_file.read()
             data_fixed = json.loads(data)
             pretty_json_string = json.dumps(data_fixed, indent=4)
