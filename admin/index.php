@@ -14,11 +14,18 @@ if (isset($_SESSION['userRole']) && $_SESSION['userRole'] !== 'Admin') {
 }
 
 require "../includes/connection.inc.php";
-// Query the users from the database
-$sql = "SELECT id, username, email, user_join, user_role FROM users";
+// Query the users from the database and order them by user_role
+$sql = "SELECT id, username, email, user_join, user_role FROM users ORDER BY
+        CASE
+            WHEN user_role = 'Admin' THEN 1
+            WHEN user_role = 'Moderator' THEN 2
+            WHEN user_role = 'User' THEN 3
+            ELSE 4
+        END";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $users = $stmt->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
