@@ -3,7 +3,7 @@ session_start();
 
 // Check if userId is not set
 if (!isset($_SESSION['userId'])) {
-    header("Location: login.php");
+    header("Location: /login.php");
     exit();
 }
 
