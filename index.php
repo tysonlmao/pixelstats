@@ -19,6 +19,7 @@ session_start();
     <main>
         <div class="container">
             <h2>welcome to pixelstats</h2>
+            <p>this site is in heavy development</p>
         </div>
     </main>
     <?php include "./templates/footer.php" ?>
