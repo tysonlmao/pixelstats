@@ -8,7 +8,7 @@ if (!isset($_SESSION['userId'])) {
 }
 
 // Check if the user is not an admin (assuming 'Admin' is the role for administrators)
-if (isset($_SESSION['userRole']) && $_SESSION['userRole'] !== 'Admin' || $_SESSION['userRole'] !== 'Moderator') {
+if (isset($_SESSION['userRole']) && $_SESSION['userRole'] !== 'Admin') {
     header("Location: ../dashboard.php?error=forbidden");
     exit();
 }
