@@ -19,9 +19,25 @@ with open(config_file_path, 'r') as config_file:
 if not hypixel_api_key:
     raise ValueError("Hypixel API key is missing in config.json")
 
-def get_hypixel_data(uuid):
-    url = f'https://api.hypixel.net/player?key={hypixel_api_key}&uuid={uuid}'
-    raw_data = requests.get(url)
+
+def get_hypixel_data(username, hypixel_api_key):
+    # Contact the Ashcon API to get the UUID from the username
+    ashcon_url = f'https://api.ashcon.app/mojang/v2/user/{username}'
+    ashcon_data = requests.get(ashcon_url)
+    ashcon_json = ashcon_data.json()
+
+    if ashcon_data.status_code != 200:
+        print(f"Failed to retrieve UUID for username {username}. Error {ashcon_data.status_code}.")
+        return
+
+    uuid = ashcon_json.get('uuid')
+    if uuid is None:
+        print(f"UUID not found for username {username}.")
+        return
+
+    # Use the obtained UUID to fetch data from the Hypixel API
+    hypixel_url = f'https://api.hypixel.net/player?key={hypixel_api_key}&uuid={uuid}'
+    raw_data = requests.get(hypixel_url)
     json_data = raw_data.json()
 
     ip = request.remote_addr
@@ -47,6 +63,7 @@ def get_hypixel_data(uuid):
     }})
 
     return json_data
+
 
 app = Flask(__name__)
 
