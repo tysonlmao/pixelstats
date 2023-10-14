@@ -20,7 +20,7 @@ if not hypixel_api_key:
     raise ValueError("Hypixel API key is missing in config.json")
 
 
-def get_hypixel_data(username, hypixel_api_key):
+def get_hypixel_data(username):
     # Contact the Ashcon API to get the UUID from the username
     ashcon_url = f'https://api.ashcon.app/mojang/v2/user/{username}'
     ashcon_data = requests.get(ashcon_url)
@@ -34,7 +34,6 @@ def get_hypixel_data(username, hypixel_api_key):
     if uuid is None:
         print(f"UUID not found for username {username}.")
         return
-
     # Use the obtained UUID to fetch data from the Hypixel API
     hypixel_url = f'https://api.hypixel.net/player?key={hypixel_api_key}&uuid={uuid}'
     raw_data = requests.get(hypixel_url)
@@ -73,6 +72,7 @@ def main_route():
     uuid = request.args.get('uuid')
     data = get_hypixel_data(uuid)
     return data
+
     
 
 @app.route('/tea', methods=['GET'])
