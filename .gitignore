@@ -1,2 +1,8 @@
+# sensitive files
 connection.inc.php
 server/*.json
+
+# system files
+.DS_Store
+Thumbs.db
+/node_modules

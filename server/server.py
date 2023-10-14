@@ -95,7 +95,7 @@ def updates_interval(interval):
         
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=8073)
 
     interval_seconds = 120
     update_thread = threading.Thread(target=run_check_for_updates_interval, args=(interval_seconds,))
