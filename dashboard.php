@@ -6,6 +6,27 @@ if (!isset($_SESSION['userId'])) {
     header("Location: login.php");
     exit();
 }
+
+// Include your database connection script
+require "./includes/connection.inc.php";
+
+// Fetch account information for the logged-in user
+$userId = $_SESSION['userId'];
+$sql = "SELECT main_account, alt_account FROM user_accounts WHERE user_id = :userId";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+$stmt->execute();
+$accountInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Check if account information is available
+if ($accountInfo) {
+    $mainAccount = $accountInfo['main_account'];
+    $altAccount = $accountInfo['alt_account'];
+} else {
+    // Account information not found
+    $mainAccount = "N/A";
+    $altAccount = "N/A";
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,9 +51,19 @@ if (!isset($_SESSION['userId'])) {
                 <h2 id="greeting"></h2>
                 <h2 class="px-2"><?php echo $_SESSION['userUsername'] ?></h2>
             </div>
-        </div>
-        <script src="./js/greetings.js"></script>
 
+            <div class="account-info">
+                <?php
+                echo $mainAccount; // dump it to the screen
+                echo "<script>";
+                echo "let mainAccountValue = '" . $mainAccount . "';";
+                echo "</script>";
+                ?>
+
+                <!-- <h4>Alt Account: <?php // echo $altAccount; 
+                                        ?></h4> -->
+            </div>
+        </div>
     </main>
     <?php include "./templates/footer.php" ?>
 </body>
