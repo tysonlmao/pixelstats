@@ -115,7 +115,7 @@ curl_close($ch);
                     <div class="row">
                         <div class="col-md-4 text-end">
                             <!-- echo $data['player']['achievementPoints'] . "test"; -->
-                            <div class="box">
+                            <div class="box" style="background-color: rgb(54, 47, 217, 0.3);">
                                 <div class="box-no-border">
                                     <h3 class="stat-t">Network Level</h3>
                                     <p class="stat-v"><?php echo number_format((sqrt(2 * $data['player']['networkExp'] + 30625) / 50) - 2.5, 2); ?></p>
@@ -158,6 +158,15 @@ curl_close($ch);
                                     </div>
                                 </div>
                             <?php endif; ?>
+                            <div class="box" style="background-color: rgb(208, 20, 127, 0.3); border: 3px solid rgb(208, 20, 127); box-shadow: 0 0 10px 1.5px #d0147f">
+                                BedWars
+                            </div>
+                            <div class="box" style="background-color: rgb(152, 72, 145, 0.3); border: 3px solid rgb(152, 72, 145); box-shadow: 0 0 10px 1.5px #984891">
+                                Duels
+                            </div>
+                            <div class="box" style="background-color: rgb(8, 52, 164, 0.3); border: 3px solid rgb(8, 52, 164); box-shadow: 0 0 10px 1.5px #0834a4">
+                                SkyWars
+                            </div>
                         </div>
                     </div>
                 </div>
