@@ -161,38 +161,72 @@ curl_close($ch);
                 </div>
                 <div class="tab-pane fade" id="altAccount" role="tabpanel" aria-labelledby="altAccount-tab">
                     <!-- Content for alt account -->
+                    <?php
+                    // Fetch data for the altAccount
+                    $apiUrlAlt = "https://api.pixelstats.app/requests?uuid=" . $altAccount;
+                    $chAlt = curl_init($apiUrlAlt);
+
+                    curl_setopt($chAlt, CURLOPT_RETURNTRANSFER, true);
+                    $resAlt = curl_exec($chAlt);
+
+                    if ($resAlt === false) {
+                        echo '<div class="alert alert-danger">cURL Error: ' . curl_error($chAlt) . '</div>';
+                    } else {
+                        $dataAlt = json_decode($resAlt, true);
+
+                        if (isset($dataAlt) && isset($dataAlt['player']['achievementPoints'])) {
+                            echo $dataAlt['player']['achievementPoints'];
+                        } else {
+                            echo "Data not available";
+                        }
+                    }
+
+                    curl_close($chAlt);
+                    ?>
                     <div class="row">
                         <div class="col-md-4 text-end">
-                            <div class="box-no-border">
-                                <?php
-                                // Fetch data for the altAccount
-                                $apiUrlAlt = "https://api.pixelstats.app/requests?uuid=" . $altAccount;
-                                $chAlt = curl_init($apiUrlAlt);
+                            <!-- echo $data['player']['achievementPoints'] . "test"; -->
+                            <div class="box">
+                                <div class="box-no-border">
+                                    <h3 class="stat-t">Achievement Points</h3>
+                                    <p class="stat-v"><?php echo $dataAlt['player']['achievementPoints'] ?></p>
+                                    <h3 class="stat-t">First login</h3>
+                                    <p class="stat-v"><?php echo date("Y-m-d ", (int)($dataAlt['player']['firstLogin'] / 1000)); ?></p>
+                                    <h3 class="stat-t">Last login</h3>
+                                    <!-- Y-m-d H:i:s -->
+                                    <p class="stat-v"><?php echo date("Y-m-d ", (int)($dataAlt['player']['lastLogin'] / 1000)); ?></p>
 
-                                curl_setopt($chAlt, CURLOPT_RETURNTRANSFER, true);
-                                $resAlt = curl_exec($chAlt);
-
-                                if ($resAlt === false) {
-                                    echo '<div class="alert alert-danger">cURL Error: ' . curl_error($chAlt) . '</div>';
-                                } else {
-                                    $dataAlt = json_decode($resAlt, true);
-
-                                    if (isset($dataAlt) && isset($dataAlt['player']['achievementPoints'])) {
-                                        echo $dataAlt['player']['achievementPoints'];
-                                    } else {
-                                        echo "Data not available";
-                                    }
-                                }
-
-                                curl_close($chAlt);
-                                ?>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="box-no-border">
-                                <!-- Add your alt account content here -->
-                                test
-                            </div>
+                        <div class=" col-md-8">
+                            <!-- Add your main account content here -->
+                            <?php if ($cactusKitPreference == 1 && isset($data)) : ?>
+                                <!-- This block of code will only be executed if the conditions are met -->
+                                <div class="box cactus" style="border: 3px solid #acc42c !important; box-shadow: 0 0 10px 1.5px #acc42c; background-color: rgba(172, 196, 44, 0.3);">
+                                    <div class="row px-5">
+                                        <div class="col-md-2 align-items-end">
+                                            <img src="./public/cactus.png" alt="cactus" height="128px">
+                                        </div>
+                                        <div class="col-md-10 d-flex justify-content-end align-items-center">
+                                            <style>
+                                                .cactus {
+                                                    font-family: "VCR OSD Mono";
+                                                    font-size: 72px;
+                                                    color: #acc42c;
+                                                }
+                                            </style>
+                                            <div class="align-items-center">
+                                                <!-- sw_duel_cactus_kit_wins -->
+                                                <h3 class="cactus text-center">
+                                                    <?php
+                                                    $x = $dataAlt['player']['stats']['Duels']['sw_duel_cactus_kit_wins'] + $dataAlt['player']['stats']['Duels']['sw_doubles_cactus_kit_wins'];
+                                                    echo $x ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
