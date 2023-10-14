@@ -33,7 +33,6 @@ if ($userPreference) {
     $cactusKitPreference = 1; // Assuming 1 is the default value
 }
 
-
 // Check if account information is available
 if ($accountInfo) {
     $mainAccount = $accountInfo['main_account'];
@@ -146,7 +145,9 @@ curl_close($ch);
                                                 <div class="align-items-center">
                                                     <!-- sw_duel_cactus_kit_wins -->
                                                     <h3 class="cactus text-center">
-                                                        <?php echo $data['player']['stats']['Duels']['sw_duel_cactus_kit_wins']; ?></h3>
+                                                        <?php
+                                                        $x = $data['player']['stats']['Duels']['sw_duel_cactus_kit_wins'] + $data['player']['stats']['Duels']['sw_doubles_cactus_kit_wins'];
+                                                        echo $x ?></h3>
                                                 </div>
                                             </div>
                                         </div>
