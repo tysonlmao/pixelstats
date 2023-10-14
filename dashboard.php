@@ -117,6 +117,8 @@ curl_close($ch);
                             <!-- echo $data['player']['achievementPoints'] . "test"; -->
                             <div class="box">
                                 <div class="box-no-border">
+                                    <h3 class="stat-t">Network Level</h3>
+                                    <p class="stat-v"><?php echo number_format((sqrt(2 * $data['player']['networkExp'] + 30625) / 50) - 2.5, 2); ?></p>
                                     <h3 class="stat-t">Achievement Points</h3>
                                     <p class="stat-v"><?php echo $data['player']['achievementPoints'] ?></p>
                                     <h3 class="stat-t">First login</h3>
