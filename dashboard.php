@@ -65,7 +65,7 @@ if ($accountInfo) {
             </div>
         </div>
     </main>
-    <script src="./js/dashboard_view.js"></script>
+    <script type="module" src="./js/dashboard_view.js"></script>
     <?php include "./templates/footer.php" ?>
 </body>
 
