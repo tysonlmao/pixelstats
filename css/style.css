@@ -47,7 +47,7 @@ a:hover {
 
 .box {
   margin-top: 1rem;
-  padding: 1.5rem 0 1.5rem 0;
+  padding: 1.5rem;
   border: 3px solid #362FD9;
   border-radius: 10px;
   box-shadow: 0 0 10px 1.5px #362FD9;
@@ -55,7 +55,7 @@ a:hover {
 
 .box-no-border {
   margin-top: 0.75rem;
-  padding: 0 1.5rem 0 1.5rem;
+  padding: 1.5rem;
 }
 
 /* signup.php */

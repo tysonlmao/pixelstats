@@ -175,7 +175,6 @@ curl_close($ch);
                         $dataAlt = json_decode($resAlt, true);
 
                         if (isset($dataAlt) && isset($dataAlt['player']['achievementPoints'])) {
-                            echo $dataAlt['player']['achievementPoints'];
                         } else {
                             echo "Data not available";
                         }
@@ -186,7 +185,7 @@ curl_close($ch);
                     <div class="row">
                         <div class="col-md-4 text-end">
                             <!-- echo $data['player']['achievementPoints'] . "test"; -->
-                            <div class="box">
+                            <div class="box" style="background-color: rgb(54, 47, 217, 0.3);">
                                 <div class="box-no-border">
                                     <h3 class="stat-t">Achievement Points</h3>
                                     <p class="stat-v"><?php echo $dataAlt['player']['achievementPoints'] ?></p>
@@ -201,6 +200,7 @@ curl_close($ch);
                         </div>
                         <div class=" col-md-8">
                             <!-- Add your main account content here -->
+                            <!-- update user_accounts set cactus_kit = 1 where user_id=4; -->
                             <?php if ($cactusKitPreference == 1 && isset($data)) : ?>
                                 <!-- This block of code will only be executed if the conditions are met -->
                                 <div class="box cactus" style="border: 3px solid #acc42c !important; box-shadow: 0 0 10px 1.5px #acc42c; background-color: rgba(172, 196, 44, 0.3);">

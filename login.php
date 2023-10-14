@@ -29,7 +29,7 @@ if (isset($_SESSION['userId'])) {
     </header>
     <main>
         <div class="box">
-            <div class="row">
+            <div class="row px-3">
                 <div class="col-md-6">
                     <?php
                     if (isset($_GET['error'])) :

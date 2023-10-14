@@ -19,7 +19,7 @@
         </div>
     </header>
     <main class="animate__animated animate__fadeInUp">
-        <div class="box">
+        <div class="box px-3">
             <?php
             if (isset($_GET['error'])) :
                 if ($_GET['error'] == 'emptyFields') :
