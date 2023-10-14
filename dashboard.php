@@ -18,6 +18,22 @@ $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
 $stmt->execute();
 $accountInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Fetch the user's cactus_kit preference from the database
+$sqlPreference = "SELECT cactus_kit FROM user_accounts WHERE user_id = :userId";
+$stmtPreference = $pdo->prepare($sqlPreference);
+$stmtPreference->bindParam(':userId', $userId, PDO::PARAM_INT);
+$stmtPreference->execute();
+$userPreference = $stmtPreference->fetch(PDO::FETCH_ASSOC);
+
+// Set $cactusKitPreference based on the database value
+if ($userPreference) {
+    $cactusKitPreference = $userPreference['cactus_kit'];
+} else {
+    // Set a default value if no preference is found
+    $cactusKitPreference = 1; // Assuming 1 is the default value
+}
+
+
 // Check if account information is available
 if ($accountInfo) {
     $mainAccount = $accountInfo['main_account'];
@@ -99,11 +115,43 @@ curl_close($ch);
                     <!-- Content for main account -->
                     <div class="row">
                         <div class="col-md-4 text-end">
-                            <div class="box-no-border"><?php echo $data['player']['achievementPoints'] ?></div>
+                            <div class="box-no-border">
+                                <?php if (isset($data['player']['achievementPoints'])) {
+                                    echo $data['player']['achievementPoints'];
+                                } else {
+                                    echo "Data not available";
+                                } ?>
+                            </div>
+
+
                         </div>
                         <div class="col-md-8">
                             <div class="box-no-border">
-                                test
+                                <!-- Add your main account content here -->
+                                <?php if ($cactusKitPreference == 1 && isset($data)) : ?>
+                                    <!-- This block of code will only be executed if the conditions are met -->
+                                    <div class="box cactus" style="border: 3px solid #acc42c !important; box-shadow: 0 0 10px 1.5px #acc42c; background-color: rgba(172, 196, 44, 0.3);">
+                                        <div class="row">
+                                            <div class="col-md-2 align-items-end">
+                                                <img src="./public/cactus.png" alt="cactus" height="128px">
+                                            </div>
+                                            <div class="col-md-10 d-flex justify-content-end align-items-center">
+                                                <style>
+                                                    .cactus {
+                                                        font-family: "VCR OSD Mono";
+                                                        font-size: 72px;
+                                                        color: #acc42c;
+                                                    }
+                                                </style>
+                                                <div class="align-items-center">
+                                                    <!-- sw_duel_cactus_kit_wins -->
+                                                    <h3 class="cactus text-center">
+                                                        <?php echo $data['player']['stats']['Duels']['sw_duel_cactus_kit_wins']; ?></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -125,7 +173,12 @@ curl_close($ch);
                                     echo '<div class="alert alert-danger">cURL Error: ' . curl_error($chAlt) . '</div>';
                                 } else {
                                     $dataAlt = json_decode($resAlt, true);
-                                    echo $dataAlt['player']['achievementPoints'];
+
+                                    if (isset($dataAlt) && isset($dataAlt['player']['achievementPoints'])) {
+                                        echo $dataAlt['player']['achievementPoints'];
+                                    } else {
+                                        echo "Data not available";
+                                    }
                                 }
 
                                 curl_close($chAlt);
@@ -140,7 +193,6 @@ curl_close($ch);
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
