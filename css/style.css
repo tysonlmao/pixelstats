@@ -47,7 +47,7 @@ a:hover {
 
 .box {
   margin-top: 1rem;
-  padding: 1.5rem;
+  padding: 1.5rem 0 1.5rem 0;
   border: 3px solid #362FD9;
   border-radius: 10px;
   box-shadow: 0 0 10px 1.5px #362FD9;
@@ -55,7 +55,7 @@ a:hover {
 
 .box-no-border {
   margin-top: 0.75rem;
-  padding: 1.5rem;
+  padding: 0 1.5rem 0 1.5rem;
 }
 
 /* signup.php */
@@ -111,4 +111,22 @@ a:hover {
 
 .btn-dark > p{
   text-transform: uppercase;
+}
+/* Add custom CSS class for main account content */
+.main-account-content {
+  padding: 0 15px; /* Adjust the left and right padding as needed */
+}
+
+.stat-t {
+  text-transform: uppercase;
+  font-family: "VCR OSD Mono";
+  color: #362FD9;
+  margin: 0;
+}
+
+.stat-v {
+  margin: 0;
+  font-family: "VCR OSD Mono";
+  color: #DA0C81;
+  font-size: 24px;
 }
