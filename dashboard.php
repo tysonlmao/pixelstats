@@ -27,6 +27,31 @@ if ($accountInfo) {
     $mainAccount = "Unset";
     $altAccount = "Unset";
 }
+
+$selectedAccount = $mainAccount; // Initially, set the selected account to mainAccount
+
+// Check if the current view is the "altAccount" view, and if so, switch to altAccount
+if (isset($_GET['view']) && $_GET['view'] === 'altAccount') {
+    $selectedAccount = $altAccount;
+}
+
+$apiUrl = "https://api.pixelstats.app/requests?uuid=" . $selectedAccount;
+$ch = curl_init($apiUrl);
+
+// Set cURL options
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$res = curl_exec($ch);
+
+if ($res === false) {
+    echo '<div class="alert alert-danger">cURL Error: ' . curl_error($ch) . '</div>';
+} else {
+    // If cURL request is successful, decode the JSON response
+    $data = json_decode($res, true);
+}
+
+// Close cURL handle
+curl_close($ch);
+
 ?>
 
 <!DOCTYPE html>
@@ -57,22 +82,7 @@ if ($accountInfo) {
                 <h2 id="greeting"></h2>
                 <h2 class="px-2" id="accountTitle"><?php echo $_SESSION['userUsername'] ?></h2>
             </div>
-            <?php
-            // echo $mainAccount; // dump it to the screen
 
-            $apiUrl = "https://api.pixelstats.app/requests?uuid=" . $mainAccount;
-            $ch = curl_init($apiUrl);
-
-            // curl options
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $res = curl_exec($ch);
-            if ($res === false) {
-                echo '<div class="alert alert-danger">cURL Error: ' . curl_error($ch) . '</div>';
-            } else {
-                // if cURL success
-                $data = json_decode($res, true);
-            }
-            ?>
             <!-- Header with the "Switch Accounts" button -->
             <header class="box signup-header">
                 <div class="container text-center switcher">
@@ -88,25 +98,49 @@ if ($accountInfo) {
                 <div class="tab-pane fade show active" id="mainAccount" role="tabpanel" aria-labelledby="mainAccount-tab">
                     <!-- Content for main account -->
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="box-no-border">test</div>
+                        <div class="col-md-4 text-end">
+                            <div class="box-no-border"><?php echo $data['player']['achievementPoints'] ?></div>
                         </div>
                         <div class="col-md-8">
-                            <div class="box-no-border">test</div>
+                            <div class="box-no-border">
+                                test
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="altAccount" role="tabpanel" aria-labelledby="altAccount-tab">
                     <!-- Content for alt account -->
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="box-no-border">test</div>
+                        <div class="col-md-4 text-end">
+                            <div class="box-no-border">
+                                <?php
+                                // Fetch data for the altAccount
+                                $apiUrlAlt = "https://api.pixelstats.app/requests?uuid=" . $altAccount;
+                                $chAlt = curl_init($apiUrlAlt);
+
+                                curl_setopt($chAlt, CURLOPT_RETURNTRANSFER, true);
+                                $resAlt = curl_exec($chAlt);
+
+                                if ($resAlt === false) {
+                                    echo '<div class="alert alert-danger">cURL Error: ' . curl_error($chAlt) . '</div>';
+                                } else {
+                                    $dataAlt = json_decode($resAlt, true);
+                                    echo $dataAlt['player']['achievementPoints'];
+                                }
+
+                                curl_close($chAlt);
+                                ?>
+                            </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="box-no-border">test</div>
+                            <div class="box-no-border">
+                                <!-- Add your alt account content here -->
+                                test
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </main>

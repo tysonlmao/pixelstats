@@ -119,13 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-6">
                 <form method="POST" action="settings.php">
                     <div class="form-group">
-                        <label for="mainAccount">Main account</label>
-                        <input type="text" class="form-control" name="mainAccount" id="mainAccount" placeholder="Enter your main account" oninput="showSaveButton();" value="<?php echo $currentMainAccount; ?>" required>
+                        <input type="text" class="form-control mt-2" name="mainAccount" id="mainAccount" placeholder="Enter your main account" oninput="showSaveButton();" value="<?php echo $currentMainAccount; ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="altAccount">Alt account</label>
-                        <input type="text" class="form-control" name="altAccount" id="altAccount" placeholder="Enter your alt account" oninput="showSaveButton();" value="<?php echo $currentAltAccount; ?>">
+                        <input type="text" class="form-control mt-2" name="altAccount" id="altAccount" placeholder="Enter your alt account" oninput="showSaveButton();" value="<?php echo $currentAltAccount; ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="display: none;" id="saveButton">Save Changes</button>
