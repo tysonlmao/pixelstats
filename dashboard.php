@@ -130,7 +130,7 @@ curl_close($ch);
                                 </div>
                             </div>
                         </div>
-                        <div class=" col-md-8">
+                        <div class="col-md-8">
                             <!-- Add your main account content here -->
                             <?php if ($cactusKitPreference == 1 && isset($data)) : ?>
                                 <!-- This block of code will only be executed if the conditions are met -->
@@ -152,22 +152,45 @@ curl_close($ch);
                                                 <h3 class="cactus text-center">
                                                     <?php
                                                     $x = $data['player']['stats']['Duels']['sw_duel_cactus_kit_wins'] + $data['player']['stats']['Duels']['sw_doubles_cactus_kit_wins'];
-                                                    echo $x ?></h3>
+                                                    echo $x ?>
+                                                </h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php endif; ?>
+
                             <div class="box" style="background-color: rgb(208, 20, 127, 0.3); border: 3px solid rgb(208, 20, 127); box-shadow: 0 0 10px 1.5px #d0147f">
-                                BedWars
+                                <a data-toggle="collapse" href="#bedWarsAccordion" role="button" aria-expanded="false" aria-controls="bedWarsAccordion">
+                                    BedWars
+                                </a>
+                                <div class="collapse" id="bedWarsAccordion">
+                                    <!-- Content for BedWars goes here -->
+                                    text
+                                </div>
                             </div>
+
                             <div class="box" style="background-color: rgb(152, 72, 145, 0.3); border: 3px solid rgb(152, 72, 145); box-shadow: 0 0 10px 1.5px #984891">
-                                Duels
+                                <a data-toggle="collapse" href="#duelsAccordion" role="button" aria-expanded="false" aria-controls="duelsAccordion" class="accord-button">
+                                    Duels
+                                </a>
+                                <div class="collapse" id="duelsAccordion">
+                                    <!-- Content for Duels goes here -->
+                                    text
+                                </div>
                             </div>
+
                             <div class="box" style="background-color: rgb(8, 52, 164, 0.3); border: 3px solid rgb(8, 52, 164); box-shadow: 0 0 10px 1.5px #0834a4">
-                                SkyWars
+                                <a data-toggle="collapse" href="#skyWarsAccordion" role="button" aria-expanded="false" aria-controls="skyWarsAccordion">
+                                    SkyWars
+                                </a>
+                                <div class="collapse" id="skyWarsAccordion">
+                                    <!-- Content for SkyWars goes here -->
+                                    text
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="altAccount" role="tabpanel" aria-labelledby="altAccount-tab">

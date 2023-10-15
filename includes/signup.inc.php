@@ -43,6 +43,10 @@ else :
     elseif ($stmt_check_email->rowCount() > 0) :
         header("Location: ../register.php?error=emailTaken&username=$username&email=$email");
     else :
+
+        /**
+         * @todo make signing up also reserve a spot in the user_accounts section
+         */
         // Username is not taken, proceed with registration
         $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
         $stmt = $pdo->prepare($sql);
