@@ -133,7 +133,7 @@ curl_close($ch);
                                             Unknown
                                         <?php endif; ?>
                                     </p>
-                                    <h3 class "stat-t">First login</h3>
+                                    <h3 class="stat-t">First login</h3>
                                     <p class="stat-v">
                                         <?php if (isset($data['player']['firstLogin'])) : ?>
                                             <?php echo date("Y-m-d", (int)($data['player']['firstLogin'] / 1000)); ?>
