@@ -118,24 +118,41 @@ curl_close($ch);
                             <div class="box" style="background-color: rgba(54, 47, 217, 0.3);">
                                 <div class="box-no-border">
                                     <h3 class="stat-t">Network Level</h3>
-                                    <p class="stat-v"><?php echo number_format((sqrt(2 * $data['player']['networkExp'] + 30625) / 50) - 2.5, 2); ?></p>
-                                    <h3 class="stat-t">Achievement Points</h3>
-                                    <p class="stat-v"><?php echo $data['player']['achievementPoints'] ?></p>
-                                    <h3 class="stat-t">First login</h3>
-                                    <p class="stat-v"><?php echo date("Y-m-d ", (int)($data['player']['firstLogin'] / 1000)); ?></p>
-                                    <h3 class="stat-t">Last login</h3>
-                                    <!-- Y-m-d H:i:s -->
                                     <p class="stat-v">
-                                        <?php
-                                        if (isset($data['player']['lastLogin'])) {
-                                            echo date("Y-m-d ", (int)($data['player']['lastLogin'] / 1000));
-                                        } else {
-                                            echo "Hidden";
-                                        }
-                                        ?>
+                                        <?php if (isset($data['player']['networkExp'])) : ?>
+                                            <?php echo number_format((sqrt(2 * $data['player']['networkExp'] + 30625) / 50) - 2.5, 2); ?>
+                                        <?php else : ?>
+                                            Unknown
+                                        <?php endif; ?>
+                                    </p>
+                                    <h3 class="stat-t">Achievement Points</h3>
+                                    <p class="stat-v">
+                                        <?php if (isset($data['player']['achievementPoints'])) : ?>
+                                            <?php echo $data['player']['achievementPoints']; ?>
+                                        <?php else : ?>
+                                            Unknown
+                                        <?php endif; ?>
+                                    </p>
+                                    <h3 class "stat-t">First login</h3>
+                                    <p class="stat-v">
+                                        <?php if (isset($data['player']['firstLogin'])) : ?>
+                                            <?php echo date("Y-m-d", (int)($data['player']['firstLogin'] / 1000)); ?>
+                                        <?php else : ?>
+                                            Unknown
+                                        <?php endif; ?>
+                                    </p>
+                                    <h3 class="stat-t">Last login</h3>
+                                    <p class="stat-v">
+                                        <?php if (isset($data['player']['lastLogin'])) : ?>
+                                            <?php echo date("Y-m-d", (int)($data['player']['lastLogin'] / 1000)); ?>
+                                        <?php else : ?>
+                                            Hidden
+                                        <?php endif; ?>
                                     </p>
                                 </div>
                             </div>
+
+
 
                         </div>
                         <div class="col-md-8">
