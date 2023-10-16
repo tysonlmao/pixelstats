@@ -168,23 +168,23 @@ curl_close($ch);
                                     <!-- Content for BedWars goes here -->
                                     <div class="row align-items-center">
                                         <div class="stat mb-4"><?php echo $data['player']['stats']['Bedwars']['Experience'] ?></div>
-                                        <div class="col-md-4">
-                                            <h3 class="stat-title">FINAL KILLS</h3>
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">FINALS</h3>
                                             <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_kills_bedwars'] ?></p>
                                             <h3 class="stat-title">DEATHS</h3>
                                             <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_deaths_bedwars'] ?></p>
                                             <h3 class="stat-title">FKDR</h3>
                                             <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['final_kills_bedwars'] / $data['player']['stats']['Bedwars']['final_deaths_bedwars']), 2) ?></h3>
                                         </div>
-                                        <div class="col-md-4">
-                                            <h3 class="stat-title">BEDS BROKEN</h3>
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">BEDS</h3>
                                             <p class="stat"><?php echo $data['player']['stats']['Bedwars']['beds_broken_bedwars'] ?></p>
                                             <h3 class="stat-title">BEDS LOST</h3>
                                             <p class="stat"><?php echo $data['player']['stats']['Bedwars']['beds_lost_bedwars'] ?></p>
                                             <h3 class="stat-title">BBLR</h3>
                                             <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['beds_broken_bedwars'] / $data['player']['stats']['Bedwars']['beds_lost_bedwars']), 2) ?></h3>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <h3 class="stat-title">KILLS</h3>
                                             <p class="stat"><?php echo $data['player']['stats']['Bedwars']['kills_bedwars'] ?></p>
                                             <h3 class="stat-title">DEATHS</h3>
@@ -192,18 +192,96 @@ curl_close($ch);
                                             <h3 class="stat-title">KDR</h3>
                                             <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['kills_bedwars'] / $data['player']['stats']['Bedwars']['deaths_bedwars']), 2) ?></h3>
                                         </div>
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">WINS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['wins_bedwars'] ?></p>
+                                            <h3 class="stat-title">LOSSES</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['losses_bedwars'] ?></p>
+                                            <h3 class="stat-title">WLR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['wins_bedwars'] / $data['player']['stats']['Bedwars']['losses_bedwars']), 2) ?></h3>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <table class="table table-dark table-hover mt-3">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Wins</th>
+                                                    <th>Losses</th>
+                                                    <th>WLR</th>
+                                                    <th>Final</th>
+                                                    <th>Deaths</th>
+                                                    <th>FKDR</th>
+                                                </tr>
+                                            </thead>
+                                            <tr>
+                                                <td>Overall</td>
+                                                <td><?php echo $data['player']['stats']['Bedwars']['wins_bedwars'] ?></td>
+                                                <td><?php echo $data['player']['stats']['Bedwars']['losses_bedwars'] ?></td>
+                                                <td><?php echo number_format(($data['player']['stats']['Bedwars']['wins_bedwars'] / $data['player']['stats']['Bedwars']['losses_bedwars']), 2) ?></td>
+                                                <td><?php echo $data['player']['stats']['Bedwars']['final_kills_bedwars'] ?></td>
+                                                <td><?php echo $data['player']['stats']['Bedwars']['final_deaths_bedwars'] ?></td>
+                                                <td><?php echo number_format(($data['player']['stats']['Bedwars']['final_kills_bedwars'] / $data['player']['stats']['Bedwars']['final_deaths_bedwars']), 2) ?></td>
+
+                                            </tr>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Solo</td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_one_wins_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_one_losses_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['eight_one_wins_bedwars'] / $data['player']['stats']['Bedwars']['eight_one_losses_bedwars']), 2) ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_one_final_kills_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_one_final_deaths_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['eight_one_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['eight_one_final_deaths_bedwars']), 2) ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Doubles</td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_two_wins_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_two_losses_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['eight_two_wins_bedwars'] / $data['player']['stats']['Bedwars']['eight_two_losses_bedwars']), 2) ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_two_final_kills_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_two_final_deaths_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['eight_two_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['eight_two_final_deaths_bedwars']), 2) ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3v3v3v3</td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_three_wins_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_three_losses_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['four_three_wins_bedwars'] / $data['player']['stats']['Bedwars']['four_three_losses_bedwars']), 2) ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_three_final_kills_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_three_final_deaths_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['four_three_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['four_three_final_deaths_bedwars']), 2) ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4v4v4v4</td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_four_wins_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_four_losses_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['four_four_wins_bedwars'] / $data['player']['stats']['Bedwars']['four_four_losses_bedwars']), 2) ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_four_final_kills_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_four_final_deaths_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['four_four_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['four_four_final_deaths_bedwars']), 2) ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4v4</td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['two_four_wins_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['two_four_losses_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['two_four_wins_bedwars'] / $data['player']['stats']['Bedwars']['two_four_losses_bedwars']), 2) ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['two_four_final_kills_bedwars'] ?></td>
+                                                    <td><?php echo $data['player']['stats']['Bedwars']['two_four_final_deaths_bedwars'] ?></td>
+                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['two_four_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['two_four_final_deaths_bedwars']), 2) ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="box" style="background-color: rgb(152, 72, 145, 0.3); border: 3px solid rgb(152, 72, 145); box-shadow: 0 0 10px 1.5px #984891">
                                 <a data-toggle="collapse" href="#duelsAccordion" role="button" aria-expanded="false" aria-controls="duelsAccordion" class="accord-button">
-                                    <?php
-                                    /**
-                                     * @todo #8 basic duels stats
-                                     */
-                                    ?>
                                     <h3 class="accord-button">Duels</h3>
+                                </a>
+                                <div class="collapse" id="duelsAccordion">
+                                    <!-- Content for Duels goes here -->
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
                                             <h3 class="stat-title">WINS</h3>
@@ -222,10 +300,6 @@ curl_close($ch);
                                             <h3 class="stat"><?php echo number_format(($data['player']['stats']['Duels']['kills'] / $data['player']['stats']['Duels']['deaths']), 2) ?></h3>
                                         </div>
                                     </div>
-                                </a>
-                                <div class="collapse" id="duelsAccordion">
-                                    <!-- Content for Duels goes here -->
-                                    text
                                 </div>
                             </div>
 
