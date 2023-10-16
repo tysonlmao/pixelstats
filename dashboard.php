@@ -115,7 +115,7 @@ curl_close($ch);
                     <div class="row">
                         <div class="col-md-4 text-end">
                             <!-- echo $data['player']['achievementPoints'] . "test"; -->
-                            <div class="box" style="background-color: rgb(54, 47, 217, 0.3);">
+                            <div class="box" style="background-color: rgba(54, 47, 217, 0.3);">
                                 <div class="box-no-border">
                                     <h3 class="stat-t">Network Level</h3>
                                     <p class="stat-v"><?php echo number_format((sqrt(2 * $data['player']['networkExp'] + 30625) / 50) - 2.5, 2); ?></p>
@@ -125,15 +125,23 @@ curl_close($ch);
                                     <p class="stat-v"><?php echo date("Y-m-d ", (int)($data['player']['firstLogin'] / 1000)); ?></p>
                                     <h3 class="stat-t">Last login</h3>
                                     <!-- Y-m-d H:i:s -->
-                                    <p class="stat-v"><?php echo date("Y-m-d ", (int)($data['player']['lastLogin'] / 1000)); ?></p>
-
+                                    <p class="stat-v">
+                                        <?php
+                                        if (isset($data['player']['lastLogin'])) {
+                                            echo date("Y-m-d ", (int)($data['player']['lastLogin'] / 1000));
+                                        } else {
+                                            echo "Hidden";
+                                        }
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
+
                         </div>
                         <div class="col-md-8">
                             <!-- Add your main account content here -->
                             <?php if ($cactusKitPreference == 1 && isset($data)) : ?>
-                                <!-- This block of code will only be executed if the conditions are met -->
+                                <!-- This block of code will only be executed if the conditions are met and keys are defined -->
                                 <div class="box cactus" style="border: 3px solid #acc42c !important; box-shadow: 0 0 10px 1.5px #acc42c; background-color: rgba(172, 196, 44, 0.3);">
                                     <div class="row px-5">
                                         <div class="col-md-2 align-items-end">
@@ -148,17 +156,26 @@ curl_close($ch);
                                                 }
                                             </style>
                                             <div class="align-items-center">
+                                                <?php
+                                                $cactusKitWins = 0; // Initialize a variable to store the sum of wins
+                                                if (isset($data['player']['stats']['Duels']['sw_duel_cactus_kit_wins'])) {
+                                                    $cactusKitWins += $data['player']['stats']['Duels']['sw_duel_cactus_kit_wins'];
+                                                }
+                                                if (isset($data['player']['stats']['Duels']['sw_doubles_cactus_kit_wins'])) {
+                                                    $cactusKitWins += $data['player']['stats']['Duels']['sw_doubles_cactus_kit_wins'];
+                                                }
+                                                ?>
                                                 <!-- sw_duel_cactus_kit_wins -->
                                                 <h3 class="cactus text-center">
-                                                    <?php
-                                                    $x = $data['player']['stats']['Duels']['sw_duel_cactus_kit_wins'] + $data['player']['stats']['Duels']['sw_doubles_cactus_kit_wins'];
-                                                    echo $x ?>
+                                                    <?php echo $cactusKitWins; ?>
                                                 </h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php endif; ?>
+
+
 
                             <div class="box" style="background-color: rgb(208, 20, 127, 0.3); border: 3px solid rgb(208, 20, 127); box-shadow: 0 0 10px 1.5px #d0147f">
                                 <a data-toggle="collapse" href="#bedWarsAccordion" role="button" aria-expanded="false" aria-controls="bedWarsAccordion">
