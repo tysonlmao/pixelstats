@@ -72,9 +72,12 @@ $users = $stmt->fetchAll();
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Join Date</th>
-                                <th>User role</th>
+                                <th>User Role</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <!-- Inside the table body -->
                         <tbody>
                             <?php foreach ($users as $user) : ?>
                                 <tr>
@@ -83,8 +86,26 @@ $users = $stmt->fetchAll();
                                     <td><?= $user['email'] ?></td>
                                     <td><?= $user['user_join'] ?></td>
                                     <td><?= $user['user_role'] ?></td>
+                                    <td>
+                                        <span class="manage-link" data-user-id="<?= $user['id'] ?>">Manage</span> |
+                                        <span class="terminate-link" data-user-id="<?= $user['id'] ?>">Terminate</span>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
+                        </tbody>
+
+                        <style>
+                            .manage-link,
+                            .terminate-link {
+                                cursor: pointer;
+                            }
+
+                            .manage-link:hover,
+                            .terminate-link:hover {
+                                text-decoration: underline;
+                            }
+                        </style>
+
                         </tbody>
                     </table>
                 </div>
@@ -98,6 +119,54 @@ $users = $stmt->fetchAll();
     <?php include "../templates/footer.php" ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Modal for managing user accounts -->
+    <div class="modal fade" id="manageUserModal" tabindex="-1" role="dialog" aria-labelledby="manageUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="manageUserModalLabel">Manage User Accounts</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for managing user accounts goes here -->
+                    <!-- You can use this space to display and update user account information -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateUserAccountsBtn">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle the click events -->
+    <!-- JavaScript for handling "Terminate" link -->
+    <script>
+        $(document).ready(function() {
+            $('.terminate-link').click(function() {
+                var userId = $(this).data('user-id');
+                if (confirm("Are you sure you want to terminate this user?")) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../includes/terminate.inc.php", // Update the URL to match the correct path
+                        data: {
+                            user_id: userId
+                        },
+                        success: function(response) {
+                            alert("User terminated successfully.");
+                            location.reload(); // Reload the page to update the user list
+                        },
+                        error: function(xhr, status, error) {
+                            alert("An error occurred while terminating the user.\nStatus: " + status + "\nError: " + error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
