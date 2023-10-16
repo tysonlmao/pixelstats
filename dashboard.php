@@ -166,12 +166,8 @@ curl_close($ch);
                                 </a>
                                 <div class="collapse" id="bedWarsAccordion">
                                     <!-- Content for BedWars goes here -->
-                                    <?php
-                                    /**
-                                     * @todo #7 basic bedwars stats
-                                     */
-                                    ?>
                                     <div class="row align-items-center">
+                                        <div class="stat mb-4"><?php echo $data['player']['stats']['Bedwars']['Experience'] ?></div>
                                         <div class="col-md-4">
                                             <h3 class="stat-title">FINAL KILLS</h3>
                                             <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_kills_bedwars'] ?></p>
@@ -208,7 +204,24 @@ curl_close($ch);
                                      */
                                     ?>
                                     <h3 class="accord-button">Duels</h3>
-
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <h3 class="stat-title">WINS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Duels']['wins'] ?></p>
+                                            <h3 class="stat-title">LOSSES</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Duels']['losses'] ?></p>
+                                            <h3 class="stat-title">WLR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Duels']['wins'] / $data['player']['stats']['Duels']['losses']), 2) ?></h3>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3 class="stat-title">KILLS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Duels']['kills'] ?></p>
+                                            <h3 class="stat-title">DEATHS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Duels']['deaths'] ?></p>
+                                            <h3 class="stat-title">KDR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Duels']['kills'] / $data['player']['stats']['Duels']['deaths']), 2) ?></h3>
+                                        </div>
+                                    </div>
                                 </a>
                                 <div class="collapse" id="duelsAccordion">
                                     <!-- Content for Duels goes here -->
@@ -312,36 +325,7 @@ curl_close($ch);
 
     <!-- Include Bootstrap JS for tab functionality -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-
-    <script>
-        // Function to switch the account titles, tabs, and content
-        function switchAccounts() {
-            const mainTitle = document.getElementById("mainAccountTitle");
-            const altTitle = document.getElementById("altAccountTitle");
-            const mainTab = document.getElementById("mainAccount-tab");
-            const altTab = document.getElementById("altAccount-tab");
-            const mainContent = document.getElementById("mainAccount");
-            const altContent = document.getElementById("altAccount");
-
-            // Swap the text content of h2 and h3
-            const tempTitle = mainTitle.textContent;
-            mainTitle.textContent = altTitle.textContent;
-            altTitle.textContent = tempTitle;
-
-            // Toggle active content
-            mainContent.classList.toggle("show");
-            mainContent.classList.toggle("active");
-            altContent.classList.toggle("show");
-            altContent.classList.toggle("active");
-        }
-        // Add event listener to the "Switch Accounts" button
-        const switchButton = document.getElementById("switchButton");
-        switchButton.addEventListener("click", function() {
-            // Call the function to switch account titles, tabs, and content
-            switchAccounts();
-        });
-    </script>
-
+    <script src="./js/accountSwitch.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
