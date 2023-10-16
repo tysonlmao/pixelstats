@@ -162,17 +162,53 @@ curl_close($ch);
 
                             <div class="box" style="background-color: rgb(208, 20, 127, 0.3); border: 3px solid rgb(208, 20, 127); box-shadow: 0 0 10px 1.5px #d0147f">
                                 <a data-toggle="collapse" href="#bedWarsAccordion" role="button" aria-expanded="false" aria-controls="bedWarsAccordion">
-                                    BedWars
+                                    <h3 class="accord-button">BedWars</h3>
                                 </a>
                                 <div class="collapse" id="bedWarsAccordion">
                                     <!-- Content for BedWars goes here -->
-                                    text
+                                    <?php
+                                    /**
+                                     * @todo #7 basic bedwars stats
+                                     */
+                                    ?>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4">
+                                            <h3 class="stat-title">FINAL KILLS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_kills_bedwars'] ?></p>
+                                            <h3 class="stat-title">DEATHS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_deaths_bedwars'] ?></p>
+                                            <h3 class="stat-title">FKDR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['final_kills_bedwars'] / $data['player']['stats']['Bedwars']['final_deaths_bedwars']), 2) ?></h3>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h3 class="stat-title">BEDS BROKEN</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['beds_broken_bedwars'] ?></p>
+                                            <h3 class="stat-title">BEDS LOST</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['beds_lost_bedwars'] ?></p>
+                                            <h3 class="stat-title">BBLR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['beds_broken_bedwars'] / $data['player']['stats']['Bedwars']['beds_lost_bedwars']), 2) ?></h3>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h3 class="stat-title">KILLS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['kills_bedwars'] ?></p>
+                                            <h3 class="stat-title">DEATHS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['deaths_bedwars'] ?></p>
+                                            <h3 class="stat-title">KDR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['kills_bedwars'] / $data['player']['stats']['Bedwars']['deaths_bedwars']), 2) ?></h3>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="box" style="background-color: rgb(152, 72, 145, 0.3); border: 3px solid rgb(152, 72, 145); box-shadow: 0 0 10px 1.5px #984891">
                                 <a data-toggle="collapse" href="#duelsAccordion" role="button" aria-expanded="false" aria-controls="duelsAccordion" class="accord-button">
-                                    Duels
+                                    <?php
+                                    /**
+                                     * @todo #8 basic duels stats
+                                     */
+                                    ?>
+                                    <h3 class="accord-button">Duels</h3>
+
                                 </a>
                                 <div class="collapse" id="duelsAccordion">
                                     <!-- Content for Duels goes here -->
@@ -181,8 +217,13 @@ curl_close($ch);
                             </div>
 
                             <div class="box" style="background-color: rgb(8, 52, 164, 0.3); border: 3px solid rgb(8, 52, 164); box-shadow: 0 0 10px 1.5px #0834a4">
-                                <a data-toggle="collapse" href="#skyWarsAccordion" role="button" aria-expanded="false" aria-controls="skyWarsAccordion">
-                                    SkyWars
+                                <a data-toggle="collapse" href="#skyWarsAccordion" role="button" aria-expanded="false" aria-controls="skyWarsAccordion" class="accord-button">
+                                    <?php
+                                    /**
+                                     * @todo #9 basic skywars stats
+                                     */
+                                    ?>
+                                    <h3 class="accord-button">SkyWars</h3>
                                 </a>
                                 <div class="collapse" id="skyWarsAccordion">
                                     <!-- Content for SkyWars goes here -->

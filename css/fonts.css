@@ -2,7 +2,8 @@
     font-family: "Roboto Mono";
     src: url("../public/fonts/roboto_mono.woff2");
 }
+
 @font-face {
     font-family: "VCR OSD Mono";
-    src: url("../public/fonts//VCR_OSD_MONO_1.001\ 2.ttf");
+    src: url("../public/fonts/VCR_OSD_MONO_1.001 2.ttf");
 }
