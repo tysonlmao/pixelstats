@@ -13,13 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Python and pip
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
+    - name: Scan connection.inc.php for sensitive information
+      run: grep -i -E '(password|secret|sensitive_data)' ./includes/connection.inc.php
 
-    - name: Install truffleHog
-      run: pip install truffleHog
-
-    - name: Run truffleHog
-      run: trufflehog --regex --max_depth 30 ./includes/connection.inc.php
