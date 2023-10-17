@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body class="content">
     <?php include "./templates/header.php" ?>
     <header class="box signup-header">
         <div class="container text-center">
