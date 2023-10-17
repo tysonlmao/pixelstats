@@ -37,7 +37,7 @@ if (isset($_SESSION['userId'])) {
                     if (isset($_GET['error'])) :
                         if ($_GET['error'] == 'emailPasswordInvalid' || $_GET['error'] == 'emptyFields') :
                             $message = 'Invalid email or password';
-                            echo '<div class="alert alert-danger">' . $message . '</div>';
+                            echo '<div class="alert alert-danger content">' . $message . '</div>';
                         endif;
                     endif;
                     ?>

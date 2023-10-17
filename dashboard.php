@@ -58,7 +58,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 
 if ($res === false) {
-    echo '<div class="alert alert-danger">cURL Error: ' . curl_error($ch) . '</div>';
+    echo '<div class="alert alert-danger content">cURL Error: ' . curl_error($ch) . '</div>';
 } else {
     // If cURL request is successful, decode the JSON response
     $data = json_decode($res, true);
@@ -368,7 +368,7 @@ curl_close($ch);
                     $resAlt = curl_exec($chAlt);
 
                     if ($resAlt === false) {
-                        echo '<div class="alert alert-danger">cURL Error: ' . curl_error($chAlt) . '</div>';
+                        echo '<div class="alert alert-danger content">cURL Error: ' . curl_error($chAlt) . '</div>';
                     } else {
                         $dataAlt = json_decode($resAlt, true);
 

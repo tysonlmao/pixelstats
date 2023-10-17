@@ -17,7 +17,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 
 if ($res === false) {
-    echo '<div class="alert alert-danger">cURL Error: ' . curl_error($ch) . '</div>';
+    echo '<div class="alert alert-danger content">cURL Error: ' . curl_error($ch) . '</div>';
 } else {
     $data = json_decode($res, true);
     curl_close($ch);
