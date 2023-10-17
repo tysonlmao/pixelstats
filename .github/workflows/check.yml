@@ -19,7 +19,7 @@ jobs:
         python-version: 3.x
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: pip install truffleHog
 
     - name: Run truffleHog
-      run: trufflehog --regex --max_depth 30 . # Replace "." with the directory path where your code is located
+      run: trufflehog --regex --max_depth 30 ./includes/connection.inc.php
