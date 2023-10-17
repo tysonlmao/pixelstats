@@ -18,9 +18,11 @@ if (isset($_SESSION['userId'])) {
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/animate.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
+
 </head>
 
-<body>
+<body class="login content">
     <?php include "./templates/header.php" ?>
     <header class="box signup-header">
         <div class="container text-center">

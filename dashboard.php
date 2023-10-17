@@ -80,6 +80,8 @@ curl_close($ch);
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/animate.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
+
     <style>
         /* Hide the tab navigation elements */
         #accountTabs {
@@ -91,7 +93,7 @@ curl_close($ch);
 
 <body class="dashboard">
     <?php include "./templates/header.php" ?>
-    <main>
+    <main class="content">
         <div class="container">
             <div class="d-flex mb-3">
                 <h2 id="greeting"></h2>

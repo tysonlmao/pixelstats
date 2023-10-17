@@ -36,9 +36,11 @@ if ($res === false) {
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/animate.css">
     <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
+
 </head>
 
-<body class="dashboard">
+<body class="profile content">
     <!-- Include your header content here -->
     <?php include "./templates/header.php" ?>
     <div class="row px-2">

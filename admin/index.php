@@ -39,9 +39,11 @@ $users = $stmt->fetchAll();
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
+
 </head>
 
-<body>
+<body class="content">
     <?php include "../templates/header.php" ?>
     <header class="box signup-header">
         <div class="container text-center">
@@ -53,7 +55,7 @@ $users = $stmt->fetchAll();
         <!-- tabs here -->
         <div class="box-no-border">
             <nav>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs content" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Users List</a>
                     </li>
