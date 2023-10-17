@@ -1,5 +1,8 @@
 <?php
-include "./config.php";
+if (!defined('RECAPTCHA_SECRET_KEY')) {
+    include "./includes/config.php";
+}
+
 $dbname = PDO_DBNAME;
 $dbuser = PDO_DBUSER;
 $dbpassword = PDO_DBPASSWORD;
