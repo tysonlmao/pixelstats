@@ -97,7 +97,7 @@ curl_close($ch);
         <div class="container">
             <div class="d-flex mb-3">
                 <h2 id="greeting"></h2>
-                <h2 class="px-2" id="accountTitle"><?php echo $_SESSION['userUsername'] ?></h2>
+                <h2 class="px-2" id="accountTitle"><?php echo $_SESSION['userUsername'] ?>.</h2>
             </div>
 
             <!-- Header with the "Switch Accounts" button -->
