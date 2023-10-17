@@ -7,7 +7,8 @@ if (!isset($_SESSION['userId'])) {
     exit();
 }
 
-require "./includes/connection.inc.php"; // Include your database connection code
+include "./includes/config.php";
+include "./includes/connection.inc.php";
 
 // Fetch user account data from the database
 $userId = $_SESSION['userId'];
