@@ -1,0 +1,25 @@
+name: Security Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  security-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Python and pip
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run truffleHog
+      run: trufflehog --regex --max_depth 30 . # Replace "." with the directory path where your code is located
