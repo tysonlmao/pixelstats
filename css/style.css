@@ -204,7 +204,7 @@ a:hover {
 
 
 .content {
-  padding-top: 60px; /* Add padding to the top to create space for the navbar */
+  padding-top: 20px; /* Add padding to the top to create space for the navbar */
   max-width: 900px;
   margin: 0 auto;
 }

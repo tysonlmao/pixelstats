@@ -11,34 +11,42 @@ if (isset($_SESSION['userId'])) {
 <div class="navbar">
     <?php if ($showAdminBar) : ?>
         <div class="admin-bar">
-            <a href="/index.php" class="nav-link"><i class="bi bi-house-door"></i></a>
+            <a href="/index.php" class="nav-link"><i class="bi bi-house-door"></i> Home</a>
             <a href="/dashboard.php" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
-            <a href="/admin/index.php" class="nav-link"><i class="bi bi-people"></i> Manage users</a>
+            <a href="/admin/index.php" class="nav-link"><i class="bi bi-people"></i> Manage Users</a>
             <a href="/settings.php" class="nav-link"><i class="bi bi-gear"></i> Settings</a>
-            <a href="/logout.php" class="nav-link"><i class="bi bi-box-arrow-right"></i> Sign out</a>
+            <a href="/logout.php" class="nav-link"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
             <?php if (isset($_SESSION['userUsername'])) : ?>
-                <p">Howdy, <?php echo $_SESSION['userUsername']; ?></p>
-                <?php endif; ?>
+                <p class="nav-text">Howdy, <?php echo $_SESSION['userUsername']; ?></p>
+            <?php endif; ?>
         </div>
     <?php else : // Display this code if the user is not an admin 
     ?>
         <?php if (isset($_SESSION['userId'])) : // User is logged in 
         ?>
-            <a href="/dashboard.php" class="nav-link">Dashboard</a>
-            <a href="/settings.php" class="nav-link">Settings</a>
-            <a href="/logout.php" class="nav-link">Sign out</a>
-
-            <?php if (!isset($_SESSION['userRole']) || $_SESSION['userRole'] !== 'Admin') : // User is not an admin 
-            ?>
-                <a href="/admin/index.php" class="nav-link">Admin</a>
-            <?php endif; ?>
+            <a href="/dashboard.php" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="/settings.php" class="nav-link"><i class="bi bi-gear"></i> Settings</a>
+            <a href="/logout.php" class="nav-link"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
             <?php if (isset($_SESSION['userUsername'])) : ?>
-                <a class="nav-link d-flex justify-content-end">Howdy, <?php echo $_SESSION['userUsername']; ?></a>
+                <p class="nav-text">Howdy, <?php echo $_SESSION['userUsername']; ?></p>
             <?php endif; ?>
-        <?php else : // User is not logged in, show login and register 
+        <?php else : // User is not logged in, show login and register
         ?>
-            <a href="/login.php" class="nav-link">Login</a>
+            <nav class="navbar navbar-expand-lg content">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-white" href="/index.php">pixelstats</a>
+                    <ul class="navbar-nav">
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="btn text-white" href="/login.php">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         <?php endif; ?>
+
+
     <?php endif; ?>
 </div>
 </div>
