@@ -17,7 +17,7 @@ if (isset($_SESSION['userId'])) {
             <a href="/settings.php" class="nav-link"><i class="bi bi-gear"></i> Settings</a>
             <a href="/logout.php" class="nav-link"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
             <?php if (isset($_SESSION['userUsername'])) : ?>
-                <p class="nav-text">Howdy, <?php echo $_SESSION['userUsername']; ?></p>
+                <a class="nav-link">Howdy, <?php echo $_SESSION['userUsername']; ?></a>
             <?php endif; ?>
         </div>
     <?php else : // Display this code if the user is not an admin 
