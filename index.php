@@ -18,8 +18,49 @@ session_start();
     <?php include "./templates/header.php" ?>
     <main>
         <div class="container">
-            <h2>welcome to pixelstats</h2>
-            <p>this site is in heavy development</p>
+            <div class="container">
+
+                <?php
+                if (isset($_GET['player']) && !empty($_GET['player'])) :
+                    // Retrieve the username from the URL
+                    $username = $_GET['player'];
+
+                    // You can use $username to fetch and display the user's stats here
+                    // For example, you can use cURL to fetch data from your data source
+
+                    // Sample cURL code (replace with your actual API endpoint)
+                    $apiUrl = "https://api.pixelstats.app/requests?uuid=" . $username;
+                    $ch = curl_init($apiUrl);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $res = curl_exec($ch);
+
+                    if ($res === false) :
+                        echo '<div class="alert alert-danger">cURL Error: ' . curl_error($ch) . '</div>';
+                    else :
+                        $data = json_decode($res, true);
+                    // Display the user's stats here using data from $data
+                    // You can format and style the data as needed.
+                    endif;
+
+                    curl_close($ch);
+                else :
+                endif;
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="profile.php" method="get">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Search by username</label>
+                                <input type="text" class="form-control" id="username" name="player" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <h2>Welcome to Pixelstats</h2>
+                <p>This site is in heavy development.</p>
+            </div>
+
         </div>
     </main>
     <?php include "./templates/footer.php" ?>
