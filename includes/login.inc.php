@@ -1,26 +1,28 @@
 <?php
+
+/**
+ * @todo #11 allow users to login using their username as well as email
+ */
 if (!isset($_POST['login-submit'])) :
-    exit('File cannot be directly accessed.');
+    exit('File cannot be directly be accessed.');
 endif;
 
 require "./connection.inc.php";
 
 // Define POST data variables
-$email = $_POST['email'];
+$identifier = $_POST['email'];
 $password = $_POST['pwd'];
 
 // Start validation
-if (empty($email) || empty($password)) :
+if (empty($identifier) || empty($password)) :
     header("Location: ../login.php?error=emptyFields");
-elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) :
-    header("Location: ../login.php?error=invalidemail&uid=" . $email);
 else :
     // Validation passed, continue with authentication
 
-    // Check if the email exists in the database
-    $sql = "SELECT id, email, password, username, user_join, user_role FROM users WHERE email = :email";
+    // Check if the input matches either email or username
+    $sql = "SELECT id, email, password, username, user_join, user_role FROM users WHERE email = :identifier OR username = :identifier";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':identifier', $identifier, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch();
 
