@@ -1,3 +1,6 @@
+<?php
+$SITE_KEY = "6LeIt6ooAAAAACF6FhBT7NmUqLAyHYRYP54Lg8FH";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +13,8 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/animate.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
-
+    <!-- Include the reCAPTCHA JavaScript library with your site key -->
+    <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $SITE_KEY; ?>" async defer></script>
 </head>
 
 <body class="content">
@@ -24,7 +28,10 @@
         <div class="box px-3">
             <?php
             if (isset($_GET['error'])) :
-                if ($_GET['error'] == 'emptyFields') :
+                if ($_GET['error'] == 'recaptchaFailed') :
+                    $message = "reCAPTCHA verification failed. Please try again.";
+                    echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+                elseif ($_GET['error'] == 'emptyFields') :
                     $message = "Please fill in all the fields";
                     echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
                 elseif ($_GET['error'] == 'invalidUsername') :
@@ -57,7 +64,7 @@
                     <input type="text" name="username" id="username" class="form-control" value="<?php echo isset($_GET['username']) ? htmlspecialchars($_GET['username']) : ''; ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
+                    <label for "email" class="form-label">Email</label>
                     <input type="email" name="email" id="email" class="form-control" value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>">
                 </div>
                 <div class="mb-3">
@@ -71,13 +78,16 @@
                             <input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control">
                         </div>
                     </div>
-                    <div id="emailHelp" class="form-text text-white ">Password must contain 8 digits, a capital letter, a number, and a special character</div>
+                    <div id="emailHelp" class="form-text text-white">Password must contain 8 digits, a capital letter, a
+                        number, and a special character</div>
                 </div>
+
                 <button type="submit" class="btn btn-primary" name="register-submit">Submit</button>
             </form>
         </div>
 
     </main>
+
     <?php include "./templates/footer.php" ?>
 </body>
 

@@ -1,5 +1,5 @@
 <?php
-
+include "../config.php";
 // Bail early if the form was not submitted directly
 if (!isset($_POST['register-submit'])) :
     die("File cannot be directly accessed.");
@@ -12,6 +12,19 @@ $username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $passwordConfirm = $_POST['passwordConfirm'];
+
+// Verify reCAPTCHA
+$recaptchaSecret = RECAPTCHA_SECRET_KEY; // Replace with your Secret Key
+$recaptchaResponse = $_POST['g-recaptcha-response'];
+
+$recaptchaVerify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
+$recaptchaData = json_decode($recaptchaVerify);
+
+if (!$recaptchaData->success || $recaptchaData->score < 0.5) {
+    // Adjust the score threshold as needed
+    header("Location: ../register.php?error=recaptchaFailed&username=$username&email=$email");
+    exit();
+}
 
 // Validation
 if (empty($username) || empty($email) || empty($password) || empty($passwordConfirm)) :
