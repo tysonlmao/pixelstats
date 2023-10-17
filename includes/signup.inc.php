@@ -1,5 +1,5 @@
 <?php
-include "../config.php";
+include "./config.php";
 // Bail early if the form was not submitted directly
 if (!isset($_POST['register-submit'])) :
     die("File cannot be directly accessed.");
