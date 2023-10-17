@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: 3.x
 
-    - name: Install dependencies
+    - name: Install truffleHog
       run: pip install truffleHog
 
     - name: Run truffleHog
