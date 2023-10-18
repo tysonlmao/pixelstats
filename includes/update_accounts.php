@@ -6,6 +6,10 @@ if (!isset($_SESSION['userId'])) {
     exit();
 }
 
+if (!defined("ABSPATH")) :
+    die("File cannot be directly accessed.");
+endif;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require "./includes/connection.inc.php"; // Include your database connection code
 

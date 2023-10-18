@@ -6,6 +6,10 @@ if (isset($_SESSION['userId'])) {
     header("Location: dashboard.php");
     exit();
 }
+
+if (isset($_POST['login-submit'])) {
+    require "./includes/login.inc.php";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -2,6 +2,10 @@
 // Include your database connection code here
 require_once "../includes/connection.inc.php";
 
+if (!defined("ABSPATH")) :
+    die("File cannot be directly accessed.");
+endif;
+
 // Check if you have received the user ID for termination
 if (isset($_POST['user_id'])) {
     $userId = $_POST['user_id'];

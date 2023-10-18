@@ -3,6 +3,10 @@ if (!defined('RECAPTCHA_SECRET_KEY')) {
     include "../includes/config.inc.php";
 }
 
+if (!defined("ABSPATH")) :
+    die("File cannot be directly accessed.");
+endif;
+
 $dbname = PDO_DBNAME;
 $dbuser = PDO_DBUSER;
 $dbpassword = PDO_DBPASSWORD;

@@ -1,5 +1,8 @@
 <?php
 // start of pixelstats config
+if (!defined("ABSPATH")) :
+    die("File cannot be directly accessed.");
+endif;
 
 define('RECAPTCHA_SECRET_KEY', '');
 define('PDO_DBNAME', 'pixelstats');
