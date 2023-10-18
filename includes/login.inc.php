@@ -3,6 +3,10 @@
 /**
  * @todo #11 allow users to login using their username as well as email
  */
+
+if (!defined("ABSPATH")) :
+    die("File cannot be directly accessed.");
+endif;
 if (!isset($_POST['login-submit'])) :
     exit('File cannot be directly be accessed.');
 endif;
