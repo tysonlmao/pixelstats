@@ -1,6 +1,6 @@
 <?php
 if (!defined('RECAPTCHA_SECRET_KEY')) {
-    include "../includes/config.php";
+    include "../includes/config.inc.php";
 }
 
 $dbname = PDO_DBNAME;

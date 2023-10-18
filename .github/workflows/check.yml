@@ -14,4 +14,4 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Scan config.php for sensitive information
-      run: grep -i -E '(password|secret|sensitive_data)' ./includes/config.php || true
+      run: grep -i -E '(password|secret|sensitive_data)' ./includes/config.inc.php || true
