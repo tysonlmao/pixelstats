@@ -1,5 +1,8 @@
 <?php
 session_start();
+/**
+ * @todo #12 setup custom error pages + .htaccess (301, 404, 500)
+ */
 ?>
 
 <!DOCTYPE html>

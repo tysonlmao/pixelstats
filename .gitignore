@@ -7,5 +7,4 @@ server/*.json
 .DS_Store
 Thumbs.db
 /node_modules
-includes/config.php
-includes/config.php
+includes/config.inc.php

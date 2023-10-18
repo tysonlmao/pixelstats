@@ -2,10 +2,10 @@
     <div class="container mt-2 mb-2">
         <div class="row">
             <div class="col-md-6 text-start">
-                <p>made by <a target="_blank" rel="noreferrer" href="https://tysonlmao.dev">tysonlmao.dev</a></p>
+                <p>Copyright <a target="_blank" rel="noreferrer" href="https://tysonlmao.dev"><b>tysonlmao.dev</b></a></p>
             </div>
             <div class="col-md-6">
-                <p class="text-end"><a href="https://github.com/tysonlmao/pixelstats">View source</a></p>
+                <p class="text-end"><a href="https://github.com/tysonlmao/pixelstats">Proudly open-source</a></p>
             </div>
         </div>
     </div>

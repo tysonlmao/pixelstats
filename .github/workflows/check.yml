@@ -13,5 +13,5 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Scan connection.inc.php for sensitive information
-      run: grep -i -E '(password|secret|sensitive_data)' ./includes/connection.inc.php || true
+    - name: Scan config.php for sensitive information
+      run: grep -i -E '(password|secret|sensitive_data)' ./includes/config.php || true
