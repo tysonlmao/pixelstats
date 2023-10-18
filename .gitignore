@@ -8,3 +8,4 @@ server/*.json
 Thumbs.db
 /node_modules
 includes/config.inc.php
+includes/config.inc.php

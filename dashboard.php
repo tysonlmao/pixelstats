@@ -6,7 +6,7 @@ if (!isset($_SESSION['userId'])) {
     header("Location: login.php");
     exit();
 }
-require __DIR__ . '/includes/config.php';
+require __DIR__ . '/includes/config.inc.php';
 // Include your database connection script
 require "./includes/connection.inc.php";
 
