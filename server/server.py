@@ -95,8 +95,6 @@ def handle_github_webhook():
         print("Error processing GitHub webhook:", str(e))
         return "Failed to process the webhook", 500
 
-
-
 # send requests to this address as a proxy server
 @app.route('/requests', methods=['GET'])
 def main_route():
