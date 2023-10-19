@@ -67,26 +67,29 @@ app = Flask(__name__)
 
 @app.route('/update', methods=['POST'])
 def handle_github_webhook():
-    print(request.json)
     try:
-        data = request.json
-        ref = data['ref']
+        data = request.get_json()
+        if data:
+            ref = data.get('ref')
+            # Rest of your code to handle the GitHub webhook payload
+            if ref == "refs/heads/production":
+                update_command = "cd /var/www/pixelstats && git stash && git pull"
+                result = os.system(update_command)
+                print(f"Production branch update result: {result}")
+            elif ref == "refs/heads/beta":
+                update_command = "cd /var/www/pixelstats-beta/pixelstats && git stash && git pull"
+                result = os.system(update_command)
+                print(f"Beta branch update result: {result}")
 
-        if ref == "refs/heads/production":
-            update_command = "cd /var/www/pixelstats && git stash && git pull"
-            result = os.system(update_command)
-            print(f"Production branch update result: {result}")
-
-        elif ref == "refs/heads/beta":
-            update_command = "cd /var/www/pixelstats-beta/pixelstats && git stash && git pull"
-            result = os.system(update_command)
-            print(f"Beta branch update result: {result}")
-
-        # Kill the current server
-        os._exit(0)
+            # Kill the current server
+            os._exit(0)
+        else:
+            print("Invalid JSON data in the request.")
+            return "Invalid JSON data in the request", 400
     except Exception as e:
         print("Error processing GitHub webhook:", str(e))
         return "Failed to process the webhook", 500
+
 
 # send requests to this address as a proxy server
 @app.route('/requests', methods=['GET'])
