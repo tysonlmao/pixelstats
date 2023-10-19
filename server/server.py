@@ -116,7 +116,8 @@ def why():
     "Do the simple things",
     "Start simple, get complex",
     "Don't ice an uncooked cake",
-    "Less haste, more speed"
+    "Less haste, more speed",
+    "The supreme art of war is to subdue the enemy without fighting -Sun Tzu"
   ]
     return {"message": random.choice(quotes)};
 
