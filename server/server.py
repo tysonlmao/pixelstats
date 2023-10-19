@@ -84,7 +84,7 @@ def handle_github_webhook():
                 print(f"Beta branch update result: {result}")
 
             # Run the shell script
-            subprocess.Popen(["reboot.sh"])
+            subprocess.Popen(["./reboot.sh"])
 
             # Kill the current server
             os._exit(0)
