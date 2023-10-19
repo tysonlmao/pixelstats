@@ -73,7 +73,7 @@ def handle_github_webhook():
         data = request.json
         ref = data['ref']  # This will contain the branch name, e.g., "refs/heads/main" or "refs/heads/beta"
 
-        if ref == "refs/heads/main":
+        if ref == "refs/heads/production":
             # Handle updates for the production branch
             os.system("cd /var/www/pixelstats && git stash && git pull")
 
