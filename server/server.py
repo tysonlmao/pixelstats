@@ -124,7 +124,6 @@ def get_players():
         return jsonify(json.loads(pretty_json_string))
     except FileNotFoundError:
         return jsonify({"error": "players.json not found"}), 404
-.
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8073)
