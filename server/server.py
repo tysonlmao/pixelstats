@@ -68,6 +68,7 @@ app = Flask(__name__)
 
 @app.route('/update', methods=['POST'])
 def handle_github_webhook():
+    print(request.json)
     try:
         data = request.json
         ref = data['ref']
