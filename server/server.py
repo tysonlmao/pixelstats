@@ -19,7 +19,6 @@ with open(config_file_path, 'r') as config_file:
 if not hypixel_api_key:
     raise ValueError("Hypixel API key is missing in config.json")
 
-
 def get_hypixel_data(username):
     # Contact the Ashcon API to get the UUID from the username
     ashcon_url = f'https://api.ashcon.app/mojang/v2/user/{username}'
