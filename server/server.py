@@ -63,7 +63,6 @@ def get_hypixel_data(username):
 
     return json_data
 
-
 app = Flask(__name__)
 
 @app.route('/update', methods=['POST'])
