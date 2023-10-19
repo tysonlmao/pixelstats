@@ -46,7 +46,7 @@ $users = $stmt->fetchAll();
     <?php include "../templates/header.php" ?>
     <header class="box signup-header mt-5">
         <div class="container text-center">
-            <h2 href="/settings.php" class="header-text animate__animated animate__fadeIn">Admin</h2>
+            <h2 class="header-text animate__animated animate__fadeIn">Admin</h2>
         </div>
     </header>
 
