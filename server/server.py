@@ -66,6 +66,27 @@ def get_hypixel_data(username):
 
 app = Flask(__name__)
 
+@app.route('/update', methods=['POST'])
+def handle_github_webhook():
+    try:
+        data = request.json
+        ref = data['ref']  # This will contain the branch name, e.g., "refs/heads/main" or "refs/heads/beta"
+
+        if ref == "refs/heads/main":
+            # Handle updates for the production branch
+            os.system("cd /var/www/pixelstats && git stash && git pull")
+
+        elif ref == "refs/heads/beta":
+            # Handle updates for the beta branch
+            os.system("cd /var/www/pixelstats-beta && git stash && git pull")
+
+        return "Webhook received and processed successfully", 200
+    except Exception as e:
+        print("Error processing GitHub webhook:", str(e))
+        return "Failed to process the webhook", 500
+
+
+
 # send requests to this address as a proxy server
 @app.route('/requests', methods=['GET'])
 def main_route():
