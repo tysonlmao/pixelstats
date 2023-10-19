@@ -98,8 +98,6 @@ def main_route():
     data = get_hypixel_data(uuid)
     return data
 
-    
-
 @app.route('/tea', methods=['GET'])
 def teapot(): 
     return {"status": "I\'m a teapot"}, 418
