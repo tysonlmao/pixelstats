@@ -40,7 +40,6 @@ $users = $stmt->fetchAll();
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/animate.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
-
 </head>
 
 <body class="content">
@@ -50,6 +49,76 @@ $users = $stmt->fetchAll();
             <h2 href="/settings.php" class="header-text animate__animated animate__fadeIn">Admin</h2>
         </div>
     </header>
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating mt-3">
+                <input type="text" class="form-control" id="site-search" placeholder="Search by username">
+                <label for="site-search">Search by username</label>
+            </div>
+        </div>
+
+        <!-- Add the jQuery code here -->
+        <script>
+            $(document).ready(function() {
+                // Store the original table data
+                var originalTableData = $('.content').html();
+
+                // Function to show/hide search results
+                function updateSearchResults() {
+                    // Get the search input value
+                    var searchValue = $('#site-search').val().toLowerCase();
+
+                    // Initialize an empty array to store filtered results
+                    var filteredResults = [];
+
+                    // Loop through the users and find matches
+                    <?php foreach ($users as $user) : ?>
+                        var username = '<?= strtolower($user['username']) ?>';
+                        if (username.includes(searchValue)) {
+                            filteredResults.push(
+                                '<tr>' +
+                                '<td><?= $user['id'] ?></td>' +
+                                '<td><?= $user['username'] ?></td>' +
+                                '<td><?= $user['email'] ?></td>' +
+                                '<td><?= $user['user_join'] ?></td>' +
+                                '<td><?= $user['user_role'] ?></td>' +
+                                '<td>' +
+                                '<span class="manage-link" data-user-id="<?= $user['id'] ?>">Manage</span> | ' +
+                                '<span class="terminate-link" data-user-id="<?= $user['id'] ?>">Terminate</span>' +
+                                '</td>' +
+                                '</tr>'
+                            );
+                        }
+                    <?php endforeach; ?>
+
+                    // Update the table with the filtered results
+                    var updatedTable = '<table class="table table-dark table-hover"><thead><tr><th>User ID</th><th>Username</th><th>Email</th><th>Join Date</th><th>User Role</th><th>Action</th></tr></thead><tbody>';
+                    updatedTable += filteredResults.join('');
+                    updatedTable += '</tbody></table';
+
+                    // Display the updated table or a message if no results are found
+                    if (filteredResults.length > 0) {
+                        $('#search-results').html(updatedTable).show();
+                    } else {
+                        $('#search-results').html('<p>No results found.</p>').hide();
+                    }
+                }
+
+                // Call the function on page load to handle the initial state
+                updateSearchResults();
+
+                // Add an event listener for the input event of the site-search input
+                $('#site-search').on('input', updateSearchResults);
+            });
+        </script>
+
+
+
+
+
+    </div>
 
     <main>
         <!-- tabs here -->
@@ -67,6 +136,7 @@ $users = $stmt->fetchAll();
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
                     <!-- Users List content goes here -->
+                    <div id="search-results"></div>
                     <table class="table table-dark table-hover">
                         <thead>
                             <tr>
@@ -80,7 +150,6 @@ $users = $stmt->fetchAll();
                         </thead>
                         <tbody>
                             <!-- Inside the table body -->
-                        <tbody>
                             <?php foreach ($users as $user) : ?>
                                 <tr>
                                     <td><?= $user['id'] ?></td>
@@ -94,6 +163,7 @@ $users = $stmt->fetchAll();
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+
                         </tbody>
 
                         <style>
@@ -123,52 +193,99 @@ $users = $stmt->fetchAll();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Modal for managing user accounts -->
-    <div class="modal fade" id="manageUserModal" tabindex="-1" role="dialog" aria-labelledby="manageUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="manageUserModalLabel">Manage User Accounts</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form for managing user accounts goes here -->
-                    <!-- You can use this space to display and update user account information -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateUserAccountsBtn">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- JavaScript to handle the click events -->
-    <!-- JavaScript for handling "Terminate" link -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('.terminate-link').click(function() {
-                var userId = $(this).data('user-id');
-                if (confirm("Are you sure you want to terminate this user?")) {
-                    $.ajax({
-                        type: "POST",
-                        url: "../includes/terminate.inc.php", // Update the URL to match the correct path
-                        data: {
-                            user_id: userId
-                        },
-                        success: function(response) {
-                            alert("User terminated successfully.");
-                            location.reload(); // Reload the page to update the user list
-                        },
-                        error: function(xhr, status, error) {
-                            alert("An error occurred while terminating the user.\nStatus: " + status + "\nError: " + error);
-                        }
-                    });
+            // Store the original table data
+            var originalTableData = $('.content').html();
+
+            // Add an event listener to the search input
+            $('#site-search').on('input', function() {
+                // Get the search input value
+                var searchValue = $(this).val().toLowerCase();
+
+                // Initialize an empty array to store filtered results
+                var filteredResults = [];
+
+                // Loop through the users and find matches
+                <?php foreach ($users as $user) : ?>
+                    var username = '<?= strtolower($user['username']) ?>';
+                    if (username.includes(searchValue)) {
+                        filteredResults.push(
+                            '<tr>' +
+                            '<td><?= $user['id'] ?></td>' +
+                            '<td><?= $user['username'] ?></td>' +
+                            '<td><?= $user['email'] ?></td>' +
+                            '<td><?= $user['user_join'] ?></td>' +
+                            '<td><?= $user['user_role'] ?></td>' +
+                            '<td>' +
+                            '<span class="manage-link" data-user-id="<?= $user['id'] ?>">Manage</span> | ' +
+                            '<span class="terminate-link" data-user-id="<?= $user['id'] ?>">Terminate</span>' +
+                            '</td>' +
+                            '</tr>'
+                        );
+                    }
+                <?php endforeach; ?>
+
+                // Update the table with the filtered results
+                var updatedTable = '<table class="table table-dark table-hover"><thead><tr><th>User ID</th><th>Username</th><th>Email</th><th>Join Date</th><th>User Role</th><th>Action</th></tr></thead><tbody>';
+                updatedTable += filteredResults.join('');
+                updatedTable += '</tbody></table>';
+
+                // Display the updated table or a message if no results are found
+                if (filteredResults.length > 0) {
+                    $('#search-results').html(updatedTable);
+                } else {
+                    $('#search-results').html('<p>No results found.</p>');
                 }
             });
         });
+        // Function to handle termination
+        function terminateUser(userId) {
+            $.ajax({
+                type: "POST",
+                url: "./includes/terminate.inc.php",
+                data: {
+                    user_id: userId
+                },
+                success: function(response) {
+                    // Handle the response from the server
+                    if (response === "User terminated successfully.") {
+                        // Reload the page or update the user list as needed
+                        location.reload();
+                    } else {
+                        // Handle errors or display a message to the user
+                        console.log("Error: " + response);
+                    }
+                }
+            });
+        }
+
+        // Add a click event handler for the "Terminate" links
+        $('.terminate-link').click(function() {
+            var userId = $(this).data('user-id');
+            if (confirm("Are you sure you want to terminate this user?")) {
+                $.ajax({
+                    type: "POST",
+                    url: "./inc/terminate.inc.php", // Update the URL to match the correct path
+                    data: {
+                        user_id: userId
+                    },
+                    success: function(response) {
+                        alert("User terminated successfully.");
+                        location.reload(); // Reload the page to update the user list
+                    },
+                    error: function(xhr, status, error) {
+                        alert("An error occurred while terminating the user.\nStatus: " + status + "\nError: " + error);
+                    }
+                });
+            }
+        });
     </script>
+
 </body>
 
 </html>
