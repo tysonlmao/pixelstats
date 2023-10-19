@@ -85,7 +85,46 @@ def handle_github_webhook():
         print("Error processing GitHub webhook:", str(e))
         return "Failed to process the webhook", 500
 
-# Rest of your Flask routes and logic here...
+
+# send requests to this address as a proxy server
+@app.route('/requests', methods=['GET'])
+def main_route():
+    uuid = request.args.get('uuid')
+    data = get_hypixel_data(uuid)
+    return data
+
+    
+
+@app.route('/tea', methods=['GET'])
+def teapot(): 
+    return {"status": "I\'m a teapot"}, 418
+
+@app.route('/', methods=['GET'])
+def why():
+    quotes = [
+    "Fail fast, fail cheaply",
+    "Become lazy",
+    "Read the fucking manual",
+    "Target the low hanging fruit",
+    "Be part of the solution",
+    "Do the simple things",
+    "Start simple, get complex",
+    "Don't ice an uncooked cake",
+    "Less haste, more speed"
+  ]
+    return {"message": random.choice(quotes)};
+
+@app.route('/api/players', methods=['GET'])
+def get_players():
+    try:
+        with open('players.json', 'r') as json_file:
+            data = json_file.read()
+            data_fixed = json.loads(data)
+            pretty_json_string = json.dumps(data_fixed, indent=4)
+        return jsonify(json.loads(pretty_json_string))
+    except FileNotFoundError:
+        return jsonify({"error": "players.json not found"}), 404
+.
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8073)
