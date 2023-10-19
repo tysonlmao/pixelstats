@@ -8,6 +8,7 @@ import threading
 import random
 import os
 
+print("server is up!")
 config_file_path = 'config.json'
 players = TinyDB('players.json')
 
