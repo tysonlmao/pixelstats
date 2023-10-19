@@ -19,7 +19,6 @@ with open(config_file_path, 'r') as config_file:
 if not hypixel_api_key:
     raise ValueError("Hypixel API key is missing in config.json")
 
-
 def get_hypixel_data(username):
     # Contact the Ashcon API to get the UUID from the username
     ashcon_url = f'https://api.ashcon.app/mojang/v2/user/{username}'
@@ -63,28 +62,37 @@ def get_hypixel_data(username):
 
     return json_data
 
+app = Flask(__name__)
+
+import subprocess
 
 @app.route('/update', methods=['POST'])
 def handle_github_webhook():
     try:
-        data = request.json
-        ref = data['ref']  # This will contain the branch name, e.g., "refs/heads/main" or "refs/heads/beta"
+        data = request.get_json()
+        if data:
+            ref = data.get('ref')
+            # Rest of your code to handle the GitHub webhook payload
+            if ref == "refs/heads/production":
+                update_command = "cd /var/www/pixelstats && git stash && git pull"
+                result = os.system(update_command)
+                print(f"Production branch update result: {result}")
+            elif ref == "refs/heads/beta":
+                update_command = "cd /var/www/pixelstats-beta/pixelstats && git stash && git pull"
+                result = os.system(update_command)
+                print(f"Beta branch update result: {result}")
 
-        if ref == "refs/heads/main":
-            # Handle updates for the production branch
-            os.system("cd /var/www/pixelstats && git stash && git pull")
+            # Run the shell script
+            subprocess.Popen(["/var/www/pixelstats/server/reboot.sh"])
 
-        elif ref == "refs/heads/beta":
-            # Handle updates for the beta branch
-            os.system("cd /var/www/pixelstats-beta && git stash && git pull")
-
-        return "Webhook received and processed successfully", 200
+            # Kill the current server
+            os._exit(0)
+        else:
+            print("Invalid JSON data in the request.")
+            return "Invalid JSON data in the request", 400
     except Exception as e:
         print("Error processing GitHub webhook:", str(e))
         return "Failed to process the webhook", 500
-
-
-app = Flask(__name__)
 
 # send requests to this address as a proxy server
 @app.route('/requests', methods=['GET'])
@@ -92,8 +100,6 @@ def main_route():
     uuid = request.args.get('uuid')
     data = get_hypixel_data(uuid)
     return data
-
-    
 
 @app.route('/tea', methods=['GET'])
 def teapot(): 
@@ -125,12 +131,6 @@ def get_players():
     except FileNotFoundError:
         return jsonify({"error": "players.json not found"}), 404
 
-def updates_interval(interval):
-    while True:
-        check_for_updates()
-        time.sleep(interval)
-        
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8073)
 
@@ -141,4 +141,4 @@ if __name__ == '__main__':
 
     while True:
         # Your main application logic or server code goes here
-        time.sleep(1) 
+        time.sleep(1)
