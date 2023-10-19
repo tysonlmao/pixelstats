@@ -65,6 +65,8 @@ def get_hypixel_data(username):
 
 app = Flask(__name__)
 
+import subprocess
+
 @app.route('/update', methods=['POST'])
 def handle_github_webhook():
     try:
@@ -81,6 +83,9 @@ def handle_github_webhook():
                 result = os.system(update_command)
                 print(f"Beta branch update result: {result}")
 
+            # Run the shell script
+            subprocess.Popen(["reboot.sh"])
+
             # Kill the current server
             os._exit(0)
         else:
@@ -89,6 +94,7 @@ def handle_github_webhook():
     except Exception as e:
         print("Error processing GitHub webhook:", str(e))
         return "Failed to process the webhook", 500
+
 
 
 # send requests to this address as a proxy server
