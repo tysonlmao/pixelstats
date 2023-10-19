@@ -78,7 +78,7 @@ def handle_github_webhook():
             print(f"Production branch update result: {result}")
 
         elif ref == "refs/heads/beta":
-            update_command = "cd /var/www/pixelstats-beta && git stash && git pull"
+            update_command = "cd /var/www/pixelstats-beta/pixelstats && git stash && git pull"
             result = os.system(update_command)
             print(f"Beta branch update result: {result}")
 
