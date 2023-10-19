@@ -62,7 +62,7 @@ def get_hypixel_data(username):
     }})
 
     return json_data
-
+app = Flask(__name__)
 
 @app.route('/update', methods=['POST'])
 def handle_github_webhook():
@@ -84,7 +84,6 @@ def handle_github_webhook():
         return "Failed to process the webhook", 500
 
 
-app = Flask(__name__)
 
 @app.route('/update', methods=['POST'])
 def handle_github_webhook():
