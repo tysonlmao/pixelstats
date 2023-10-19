@@ -14,6 +14,8 @@ if (isset($_SESSION['userId'])) {
             <a href="/index.php" class="nav-link"><i class="bi bi-house-door"></i> Home</a>
             <a href="/dashboard.php" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
             <a href="/admin/index.php" class="nav-link"><i class="bi bi-people"></i> Manage Users</a>
+            <!-- Add the search bar here -->
+            <!-- End of search bar -->
             <a href="/settings.php" class="nav-link"><i class="bi bi-gear"></i> Settings</a>
             <a href="/logout.php" class="nav-link"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
             <?php if (isset($_SESSION['userUsername'])) : ?>
@@ -33,7 +35,7 @@ if (isset($_SESSION['userId'])) {
                         <li class="nav-item">
                             <a href="/dashboard.php" class="nav-link text-white"><i class="bi bi-speedometer2"></i> Dashboard</a>
                         </li>
-                        <li class="nav-item">
+                        <li class "nav-item">
                             <a href="/settings.php" class="nav-link text-white"><i class="bi bi-gear"></i> Settings</a>
                         </li>
                         <li class="nav-item">
@@ -42,7 +44,6 @@ if (isset($_SESSION['userId'])) {
                     </ul>
                 </div>
             </nav>
-
         <?php else : // User is not logged in, show login and register
         ?>
             <nav class="navbar navbar-expand-lg content">
