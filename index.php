@@ -21,7 +21,6 @@ session_start();
         <div class="container">
             <div class="container">
                 <h2>Welcome to Pixelstats</h2>
-                <h3>testing cicd functionality</h3>
                 <p>This site is in heavy development.</p>
                 <?php
                 if (isset($_GET['player']) && !empty($_GET['player'])) :
