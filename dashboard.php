@@ -7,10 +7,9 @@ if (!isset($_SESSION['userId'])) {
     exit();
 }
 
-// Include your database connection script
+// Include database connection script
 require "./includes/connection.inc.php";
 
-// Fetch account information for the logged-in user
 $userId = $_SESSION['userId'];
 $sql = "SELECT main_account, alt_account FROM user_accounts WHERE user_id = :userId";
 $stmt = $pdo->prepare($sql);
@@ -25,15 +24,13 @@ $stmtPreference->bindParam(':userId', $userId, PDO::PARAM_INT);
 $stmtPreference->execute();
 $userPreference = $stmtPreference->fetch(PDO::FETCH_ASSOC);
 
-// Set $cactusKitPreference based on the database value
 if ($userPreference) {
     $cactusKitPreference = $userPreference['cactus_kit'];
 } else {
     // Set a default value if no preference is found
-    $cactusKitPreference = 1; // Assuming 1 is the default value
+    $cactusKitPreference = 1;
 }
 
-// Check if account information is available
 if ($accountInfo) {
     $mainAccount = $accountInfo['main_account'];
     $altAccount = $accountInfo['alt_account'];
@@ -45,7 +42,6 @@ if ($accountInfo) {
 
 $selectedAccount = $mainAccount; // Initially, set the selected account to mainAccount
 
-// Check if the current view is the "altAccount" view, and if so, switch to altAccount
 if (isset($_GET['view']) && $_GET['view'] === 'altAccount') {
     $selectedAccount = $altAccount;
 }
@@ -53,7 +49,6 @@ if (isset($_GET['view']) && $_GET['view'] === 'altAccount') {
 $apiUrl = "https://api.pixelstats.app/requests?uuid=" . $selectedAccount;
 $ch = curl_init($apiUrl);
 
-// Set cURL options
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 
@@ -64,7 +59,6 @@ if ($res === false) {
     $data = json_decode($res, true);
 }
 
-// Close cURL handle
 curl_close($ch);
 
 ?>
@@ -116,7 +110,6 @@ curl_close($ch);
                     <!-- Content for main account -->
                     <div class="row">
                         <div class="col-md-4 text-end">
-                            <!-- echo $data['player']['achievementPoints'] . "test"; -->
                             <div class="box" style="background-color: rgba(54, 47, 217, 0.3);">
                                 <div class="box-no-border">
                                     <h3 class="stat-t">Network Level</h3>
@@ -153,9 +146,6 @@ curl_close($ch);
                                     </p>
                                 </div>
                             </div>
-
-
-
                         </div>
                         <div class="col-md-8">
                             <!-- Add your main account content here -->
@@ -203,7 +193,6 @@ curl_close($ch);
                                 <div class="collapse" id="bedWarsAccordion">
                                     <!-- Content for BedWars goes here -->
                                     <div class="row align-items-center">
-                                        <div class="stat mb-4"><?php echo $data['player']['stats']['Bedwars']['Experience'] ?></div>
                                         <div class="col-md-3">
                                             <h3 class="stat-title">FINALS</h3>
                                             <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_kills_bedwars'] ?></p>
@@ -236,78 +225,6 @@ curl_close($ch);
                                             <h3 class="stat-title">WLR</h3>
                                             <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['wins_bedwars'] / $data['player']['stats']['Bedwars']['losses_bedwars']), 2) ?></h3>
                                         </div>
-                                    </div>
-                                    <div class="container">
-                                        <table class="table table-dark table-hover mt-3">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Wins</th>
-                                                    <th>Losses</th>
-                                                    <th>WLR</th>
-                                                    <th>Final</th>
-                                                    <th>Deaths</th>
-                                                    <th>FKDR</th>
-                                                </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>Overall</td>
-                                                <td><?php echo $data['player']['stats']['Bedwars']['wins_bedwars'] ?></td>
-                                                <td><?php echo $data['player']['stats']['Bedwars']['losses_bedwars'] ?></td>
-                                                <td><?php echo number_format(($data['player']['stats']['Bedwars']['wins_bedwars'] / $data['player']['stats']['Bedwars']['losses_bedwars']), 2) ?></td>
-                                                <td><?php echo $data['player']['stats']['Bedwars']['final_kills_bedwars'] ?></td>
-                                                <td><?php echo $data['player']['stats']['Bedwars']['final_deaths_bedwars'] ?></td>
-                                                <td><?php echo number_format(($data['player']['stats']['Bedwars']['final_kills_bedwars'] / $data['player']['stats']['Bedwars']['final_deaths_bedwars']), 2) ?></td>
-
-                                            </tr>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Solo</td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_one_wins_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_one_losses_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['eight_one_wins_bedwars'] / $data['player']['stats']['Bedwars']['eight_one_losses_bedwars']), 2) ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_one_final_kills_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_one_final_deaths_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['eight_one_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['eight_one_final_deaths_bedwars']), 2) ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Doubles</td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_two_wins_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_two_losses_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['eight_two_wins_bedwars'] / $data['player']['stats']['Bedwars']['eight_two_losses_bedwars']), 2) ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_two_final_kills_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['eight_two_final_deaths_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['eight_two_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['eight_two_final_deaths_bedwars']), 2) ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3v3v3v3</td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_three_wins_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_three_losses_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['four_three_wins_bedwars'] / $data['player']['stats']['Bedwars']['four_three_losses_bedwars']), 2) ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_three_final_kills_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_three_final_deaths_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['four_three_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['four_three_final_deaths_bedwars']), 2) ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4v4v4v4</td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_four_wins_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_four_losses_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['four_four_wins_bedwars'] / $data['player']['stats']['Bedwars']['four_four_losses_bedwars']), 2) ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_four_final_kills_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['four_four_final_deaths_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['four_four_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['four_four_final_deaths_bedwars']), 2) ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4v4</td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['two_four_wins_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['two_four_losses_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['two_four_wins_bedwars'] / $data['player']['stats']['Bedwars']['two_four_losses_bedwars']), 2) ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['two_four_final_kills_bedwars'] ?></td>
-                                                    <td><?php echo $data['player']['stats']['Bedwars']['two_four_final_deaths_bedwars'] ?></td>
-                                                    <td><?php echo number_format(($data['player']['stats']['Bedwars']['two_four_final_kills_bedwars'] / $data['player']['stats']['Bedwars']['two_four_final_deaths_bedwars']), 2) ?></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -350,13 +267,36 @@ curl_close($ch);
                                 </a>
                                 <div class="collapse" id="skyWarsAccordion">
                                     <!-- Content for SkyWars goes here -->
-                                    text
+                                    <div class="row align-items-center">
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">KILLS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['SkyWars']['kills'] ?></p>
+                                            <h3 class="stat-title">DEATHS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['SkyWars']['deaths'] ?></p>
+                                            <h3 class="stat-title">KDR</h3>
+                                            <p class="stat"><?php echo number_format(($data['player']['stats']['SkyWars']['kills'] / $data['player']['stats']['SkyWars']['deaths']), 2) ?></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">WINS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['SkyWars']['wins'] ?></p>
+                                            <h3 class="stat-title">LOSSES</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['SkyWars']['losses'] ?></p>
+                                            <h3 class="stat-title">WLR</h3>
+                                            <p class="stat"><?php echo number_format(($data['player']['stats']['SkyWars']['wins'] / $data['player']['stats']['SkyWars']['losses']), 2) ?></p>
+                                        </div>
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-3"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
+
+                <!-- 
+                    START ALT ACCOUNT TAB 
+                -->
                 <div class="tab-pane fade" id="altAccount" role="tabpanel" aria-labelledby="altAccount-tab">
                     <!-- Content for alt account -->
                     <?php
@@ -383,16 +323,40 @@ curl_close($ch);
                     <div class="row">
                         <div class="col-md-4 text-end">
                             <!-- echo $data['player']['achievementPoints'] . "test"; -->
-                            <div class="box" style="background-color: rgb(54, 47, 217, 0.3);">
+                            <div class="box" style="background-color: rgba(54, 47, 217, 0.3);">
                                 <div class="box-no-border">
+                                    <h3 class="stat-t">Network Level</h3>
+                                    <p class="stat-v">
+                                        <?php if (isset($dataAlt['player']['networkExp'])) : ?>
+                                            <?php echo number_format((sqrt(2 * $dataAlt['player']['networkExp'] + 30625) / 50) - 2.5, 2); ?>
+                                        <?php else : ?>
+                                            Unknown
+                                        <?php endif; ?>
+                                    </p>
                                     <h3 class="stat-t">Achievement Points</h3>
-                                    <p class="stat-v"><?php echo $dataAlt['player']['achievementPoints'] ?></p>
+                                    <p class="stat-v">
+                                        <?php if (isset($dataAlt['player']['achievementPoints'])) : ?>
+                                            <?php echo $dataAlt['player']['achievementPoints']; ?>
+                                        <?php else : ?>
+                                            Unknown
+                                        <?php endif; ?>
+                                    </p>
                                     <h3 class="stat-t">First login</h3>
-                                    <p class="stat-v"><?php echo date("Y-m-d ", (int)($dataAlt['player']['firstLogin'] / 1000)); ?></p>
+                                    <p class="stat-v">
+                                        <?php if (isset($dataAlt['player']['firstLogin'])) : ?>
+                                            <?php echo date("Y-m-d", (int)($dataAlt['player']['firstLogin'] / 1000)); ?>
+                                        <?php else : ?>
+                                            Unknown
+                                        <?php endif; ?>
+                                    </p>
                                     <h3 class="stat-t">Last login</h3>
-                                    <!-- Y-m-d H:i:s -->
-                                    <p class="stat-v"><?php echo date("Y-m-d ", (int)($dataAlt['player']['lastLogin'] / 1000)); ?></p>
-
+                                    <p class="stat-v">
+                                        <?php if (isset($dataAlt['player']['lastLogin'])) : ?>
+                                            <?php echo date("Y-m-d", (int)($dataAlt['player']['lastLogin'] / 1000)); ?>
+                                        <?php else : ?>
+                                            Hidden
+                                        <?php endif; ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>

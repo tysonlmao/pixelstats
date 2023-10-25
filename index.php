@@ -27,10 +27,6 @@ session_start();
                     // Retrieve the username from the URL
                     $username = $_GET['player'];
 
-                    // You can use $username to fetch and display the user's stats here
-                    // For example, you can use cURL to fetch data from your data source
-
-                    // Sample cURL code (replace with your actual API endpoint)
                     $apiUrl = "https://api.pixelstats.app/requests?uuid=" . $username;
                     $ch = curl_init($apiUrl);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -40,8 +36,6 @@ session_start();
                         echo '<div class="alert alert-danger">cURL Error: ' . curl_error($ch) . '</div>';
                     else :
                         $data = json_decode($res, true);
-                    // Display the user's stats here using data from $data
-                    // You can format and style the data as needed.
                     endif;
 
                     curl_close($ch);

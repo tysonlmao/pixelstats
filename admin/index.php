@@ -42,9 +42,10 @@ $users = $stmt->fetchAll();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
 </head>
 
+
 <body class="content">
     <?php include "../templates/header.php" ?>
-    <header class="box signup-header mt-5">
+    <header class="box signup-header">
         <div class="container text-center">
             <h2 class="header-text animate__animated animate__fadeIn">Admin</h2>
         </div>
@@ -53,89 +54,75 @@ $users = $stmt->fetchAll();
     <main>
         <!-- tabs here -->
         <div class="box-no-border">
-            <nav>
-                <ul class="nav nav-tabs content mt-3" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Users List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="placeholder1-tab" data-toggle="tab" href="#placeholder1" role="tab" aria-controls="placeholder1" aria-selected="false">Placeholder 1</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
-                    <!-- Users List content goes here -->
-                    <div class="row">
-                        <div class="col-md-6">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="site-search" placeholder="Search by username">
-                                <label for="site-search">Search by username</label>
-                            </div>
-                        </div>
-                        <i class="mt-3"></i>
-                        <!-- Add the jQuery code here -->
-                        <script>
-                            $(document).ready(function() {
-                                // Store the original table data
-                                var originalTableData = $('.content').html();
-
-                                // Function to show/hide search results
-                                function updateSearchResults() {
-                                    // Get the search input value
-                                    var searchValue = $('#site-search').val().toLowerCase();
-
-                                    // Initialize an empty array to store filtered results
-                                    var filteredResults = [];
-
-                                    // Loop through the users and find matches
-                                    <?php foreach ($users as $user) : ?>
-                                        var username = '<?= strtolower($user['username']) ?>';
-                                        if (username.includes(searchValue)) {
-                                            filteredResults.push(
-                                                '<tr>' +
-                                                '<td><?= $user['id'] ?></td>' +
-                                                '<td><?= $user['username'] ?></td>' +
-                                                '<td><?= $user['email'] ?></td>' +
-                                                '<td><?= $user['user_join'] ?></td>' +
-                                                '<td><?= $user['user_role'] ?></td>' +
-                                                '<td>' +
-                                                '<span class="manage-link" data-user-id="<?= $user['id'] ?>">Manage</span> | ' +
-                                                '<span class="terminate-link" data-user-id="<?= $user['id'] ?>">Terminate</span>' +
-                                                '</td>' +
-                                                '</tr>'
-                                            );
-                                        }
-                                    <?php endforeach; ?>
-
-                                    // Update the table with the filtered results
-                                    var updatedTable = '<table class="table table-dark table-hover"><thead><tr><th>User ID</th><th>Username</th><th>Email</th><th>Join Date</th><th>User Role</th><th>Action</th></tr></thead><tbody>';
-                                    updatedTable += filteredResults.join('');
-                                    updatedTable += '</tbody></table';
-
-                                    // Display the updated table or a message if no results are found
-                                    if (filteredResults.length > 0) {
-                                        $('#search-results').html(updatedTable).show();
-                                    } else {
-                                        $('#search-results').html('<p>No results found.</p>').hide();
-                                    }
-                                }
-
-                                // Call the function on page load to handle the initial state
-                                updateSearchResults();
-
-                                // Add an event listener for the input event of the site-search input
-                                $('#site-search').on('input', updateSearchResults);
-                            });
-                        </script>
+            <!-- Users List content goes here -->
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="site-search" placeholder="Search by username">
+                        <label for="site-search">Search by username</label>
                     </div>
-                    <div id="search-results"></div>
                 </div>
-                <div class="tab-pane fade" id="placeholder1" role="tabpanel" aria-labelledby="placeholder1-tab">
-                    <div class="box">placeholder</div>
-                </div>
+                <i class="mt-3"></i>
+                <!-- Add the jQuery code here -->
+                <script>
+                    $(document).ready(function() {
+                        // Store the original table data
+                        var originalTableData = $('.content').html();
+
+                        // Function to show/hide search results
+                        function updateSearchResults() {
+                            // Get the search input value
+                            var searchValue = $('#site-search').val().toLowerCase();
+
+                            // Initialize an empty array to store filtered results
+                            var filteredResults = [];
+
+                            // Loop through the users and find matches
+                            <?php foreach ($users as $user) : ?>
+                                var username = '<?= strtolower($user['username']) ?>';
+                                if (username.includes(searchValue)) {
+                                    filteredResults.push(
+                                        '<tr>' +
+                                        '<td><?= $user['id'] ?></td>' +
+                                        '<td><?= $user['username'] ?></td>' +
+                                        '<td><?= $user['email'] ?></td>' +
+                                        '<td><?= $user['user_join'] ?></td>' +
+                                        '<td><?= $user['user_role'] ?></td>' +
+                                        '<td>' +
+                                        '<span class="manage-link" data-user-id="<?= $user['id'] ?>">Manage</span> | ' +
+                                        '<span class="terminate-link" data-user-id="<?= $user['id'] ?>">Terminate</span>' +
+                                        '</td>' +
+                                        '</tr>'
+                                    );
+                                }
+                            <?php endforeach; ?>
+
+                            // Update the table with the filtered results
+                            var updatedTable = '<table class="table table-dark table-hover"><thead><tr><th>User ID</th><th>Username</th><th>Email</th><th>Join Date</th><th>User Role</th><th>Action</th></tr></thead><tbody>';
+                            updatedTable += filteredResults.join('');
+                            updatedTable += '</tbody></table';
+
+                            // Display the updated table or a message if no results are found
+                            if (filteredResults.length > 0) {
+                                $('#search-results').html(updatedTable).show();
+                            } else {
+                                $('#search-results').html('<p>No results found.</p>').hide();
+                            }
+                        }
+
+                        // Call the function on page load to handle the initial state
+                        updateSearchResults();
+
+                        // Add an event listener for the input event of the site-search input
+                        $('#site-search').on('input', updateSearchResults);
+                    });
+                </script>
+            </div>
+            <div id="search-results"></div>
+            <div class="tab-pane fade" id="placeholder1" role="tabpanel" aria-labelledby="placeholder1-tab">
+                <div class="box">placeholder</div>
             </div>
         </div>
     </main>
