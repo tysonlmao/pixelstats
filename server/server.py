@@ -8,10 +8,11 @@ import threading
 import random
 import os
 import subprocess
-import mysql.connector
 
 config_file_path = 'config.json'
 players = TinyDB('players.json')
+
+app = Flask(__name__)
 
 with open(config_file_path, 'r') as config_file:
     config_data = json.load(config_file)
@@ -64,10 +65,6 @@ def get_hypixel_data(username):
 
     return json_data
 
-app = Flask(__name__)
-
-import subprocess
-
 @app.route('/update', methods=['POST'])
 def handle_github_webhook():
     try:
@@ -95,57 +92,6 @@ def handle_github_webhook():
     except Exception as e:
         print("Error processing GitHub webhook:", str(e))
         return "Failed to process the webhook", 500
-
-@app.route('/verify_account', methods=['POST'])
-def verify_minecraft_account():
-    data = request.get_json()
-    main_account = data.get('main_account')
-    alt_account = data.get('alt_account')
-    verification_code = data.get('code')  # Assuming you send the code from the plugin
-
-    # Check if the verification code is correct
-    if not is_valid_verification_code(main_account, alt_account, verification_code):
-        return jsonify({"message": "Invalid verification code"}), 401
-
-    # Use the MySQL configuration from the config.json
-    mysql_host = config_data.get('mysql_host')
-    mysql_user = config_data.get('mysql_user')
-    mysql_password = config_data.get('mysql_password')
-    mysql_database = config_data.get('mysql_database')
-
-    # Establish a database connection
-    db = mysql.connector.connect(
-        host=mysql_host,
-        user=mysql_user,
-        password=mysql_password,
-        database=mysql_database
-    )
-
-    cursor = db.cursor()
-
-    # Query the database to check if the accounts exist
-    query = "SELECT * FROM user_accounts WHERE main_account=%s AND alt_account=%s"
-    cursor.execute(query, (main_account, alt_account))
-
-    result = cursor.fetchone()
-
-    # Update the verified_main and verified_alt columns based on the verification status
-    if result:
-        update_query = "UPDATE user_accounts SET verified_main = %s, verified_alt = %s WHERE main_account=%s AND alt_account=%s"
-        cursor.execute(update_query, (1, 1, main_account, alt_account))  # Assuming both accounts are verified
-        db.commit()  # Commit the changes to the database
-        return jsonify({"message": "Account verified"})
-    else:
-        return jsonify({"message": "Account not verified"}), 401
-
-# Implement your code validation logic here
-def is_valid_verification_code(main_account, alt_account, code):
-    # Add your code validation logic here
-    # Check if the code is valid for the provided main_account and alt_account
-    # Return True if valid, False otherwise
-    return True  # Replace with your validation logic
-
-
 
 # send requests to this address as a proxy server
 @app.route('/requests', methods=['GET'])
@@ -186,12 +132,3 @@ def get_players():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8073)
-
-    interval_seconds = 120
-    update_thread = threading.Thread(target=run_check_for_updates_interval, args=(interval_seconds,))
-    update_thread.daemon = True  # Set the thread as a daemon to terminate when the main thread exits
-    update_thread.start()
-
-    while True:
-        # Your main application logic or server code goes here
-        time.sleep(1)
