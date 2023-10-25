@@ -8,7 +8,7 @@ if (!isset($_GET['player'])) {
     exit();
 }
 
-$player = $_GET['player']; // Get the player name from the query parameter
+$player = $_GET['player'];
 
 $apiUrl = "https://api.pixelstats.app/requests?uuid=" . $player;
 $ch = curl_init($apiUrl);

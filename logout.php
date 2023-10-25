@@ -8,11 +8,9 @@ if (isset($_SESSION['userId'])) :
     // Destroy the session
     session_destroy();
 
-    // Redirect to a page after logout (e.g., the login page)
     header("Location: login.php");
     exit();
 else :
-    // If the user is not logged in, redirect them to the login page
     header("Location: login.php");
     exit();
 endif;

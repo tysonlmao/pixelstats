@@ -7,9 +7,8 @@ if (!isset($_SESSION['userId'])) {
     exit();
 }
 
-require "./includes/connection.inc.php"; // Include your database connection code
+require "./includes/connection.inc.php";
 
-// Fetch user account data from the database
 $userId = $_SESSION['userId'];
 $sql = "SELECT main_account, alt_account FROM user_accounts WHERE user_id = :userId";
 $stmt = $pdo->prepare($sql);
@@ -17,7 +16,6 @@ $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
 $stmt->execute();
 $userAccountData = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Initialize variables to store the current values
 $currentMainAccount = $userAccountData['main_account'];
 $currentAltAccount = $userAccountData['alt_account'];
 
@@ -42,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <small><?php echo $_SESSION['userEmail'] ?></small>
                     <h4>Joined</h4>
-                    <small><?php echo date("F j, Y", strtotime($_SESSION['userJoin'])) ?></small>
+                    <small><?php echo date("Y-m-d H:i T", strtotime($_SESSION['userJoin'])) ?></small>
                     <h4>User ID</h4>
                     <small><?php echo $_SESSION['userId'] ?></small>
                 </div>

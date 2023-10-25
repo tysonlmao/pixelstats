@@ -7,10 +7,9 @@ if (!isset($_SESSION['userId'])) {
     exit();
 }
 
-// Include your database connection script
+// Include database connection script
 require "./includes/connection.inc.php";
 
-// Fetch account information for the logged-in user
 $userId = $_SESSION['userId'];
 $sql = "SELECT main_account, alt_account FROM user_accounts WHERE user_id = :userId";
 $stmt = $pdo->prepare($sql);
@@ -25,15 +24,13 @@ $stmtPreference->bindParam(':userId', $userId, PDO::PARAM_INT);
 $stmtPreference->execute();
 $userPreference = $stmtPreference->fetch(PDO::FETCH_ASSOC);
 
-// Set $cactusKitPreference based on the database value
 if ($userPreference) {
     $cactusKitPreference = $userPreference['cactus_kit'];
 } else {
     // Set a default value if no preference is found
-    $cactusKitPreference = 1; // Assuming 1 is the default value
+    $cactusKitPreference = 1;
 }
 
-// Check if account information is available
 if ($accountInfo) {
     $mainAccount = $accountInfo['main_account'];
     $altAccount = $accountInfo['alt_account'];
@@ -45,7 +42,6 @@ if ($accountInfo) {
 
 $selectedAccount = $mainAccount; // Initially, set the selected account to mainAccount
 
-// Check if the current view is the "altAccount" view, and if so, switch to altAccount
 if (isset($_GET['view']) && $_GET['view'] === 'altAccount') {
     $selectedAccount = $altAccount;
 }
@@ -53,7 +49,6 @@ if (isset($_GET['view']) && $_GET['view'] === 'altAccount') {
 $apiUrl = "https://api.pixelstats.app/requests?uuid=" . $selectedAccount;
 $ch = curl_init($apiUrl);
 
-// Set cURL options
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 
@@ -64,7 +59,6 @@ if ($res === false) {
     $data = json_decode($res, true);
 }
 
-// Close cURL handle
 curl_close($ch);
 
 ?>
