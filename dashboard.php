@@ -24,27 +24,27 @@ $stmtPreference->bindParam(':userId', $userId, PDO::PARAM_INT);
 $stmtPreference->execute();
 $userPreference = $stmtPreference->fetch(PDO::FETCH_ASSOC);
 
-if ($userPreference) {
+if ($userPreference) :
     $cactusKitPreference = $userPreference['cactus_kit'];
-} else {
+else :
     // Set a default value if no preference is found
     $cactusKitPreference = 1;
-}
+endif;
 
-if ($accountInfo) {
+if ($accountInfo) :
     $mainAccount = $accountInfo['main_account'];
     $altAccount = $accountInfo['alt_account'];
-} else {
+else :
     // Account information not found
     $mainAccount = "Unset";
     $altAccount = "Unset";
-}
+endif;
 
 $selectedAccount = $mainAccount; // Initially, set the selected account to mainAccount
 
-if (isset($_GET['view']) && $_GET['view'] === 'altAccount') {
+if (isset($_GET['view']) && $_GET['view'] === 'altAccount') :
     $selectedAccount = $altAccount;
-}
+endif;
 
 $apiUrl = "https://api.pixelstats.app/requests?uuid=" . $selectedAccount;
 $ch = curl_init($apiUrl);
@@ -52,12 +52,12 @@ $ch = curl_init($apiUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 
-if ($res === false) {
+if ($res === false) :
     echo '<div class="alert alert-danger content">cURL Error: ' . curl_error($ch) . '</div>';
-} else {
+else :
     // If cURL request is successful, decode the JSON response
     $data = json_decode($res, true);
-}
+endif;
 
 curl_close($ch);
 
@@ -379,7 +379,7 @@ curl_close($ch);
                                                 }
                                             </style>
                                             <div class="align-items-center">
-                                                <!-- sw_duel_cactus_kit_wins -->
+                                                <!-- sw_duel_cactus_kit_wins --
                                                 <h3 class="cactus text-center">
                                                     <?php
                                                     $x = $dataAlt['player']['stats']['Duels']['sw_duel_cactus_kit_wins'] + $dataAlt['player']['stats']['Duels']['sw_doubles_cactus_kit_wins'];
@@ -398,10 +398,10 @@ curl_close($ch);
     <?php include "./templates/footer.php" ?>
 
     <!-- Include Bootstrap JS for tab functionality -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-    <script src="./js/accountSwitch.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+                                                <script src="./js/accountSwitch.js"></script>
+                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

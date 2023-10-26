@@ -21,17 +21,30 @@ with open(config_file_path, 'r') as config_file:
 if not hypixel_api_key:
     raise ValueError("Hypixel API key is missing in config.json")
 
-def get_hypixel_data(username):
-    # Contact the Ashcon API to get the UUID from the username
-    ashcon_url = f'https://api.ashcon.app/mojang/v2/user/{username}'
-    ashcon_data = requests.get(ashcon_url)
-    ashcon_json = ashcon_data.json()
+def get_mojang_uuid(username):
+    mojang_url = f'https://api.mojang.com/users/profiles/minecraft/{username}'
+    mojang_data = requests.get(mojang_url)
 
-    if ashcon_data.status_code != 200:
-        print(f"Failed to retrieve UUID for username {username}. Error {ashcon_data.status_code}.")
+    if mojang_data.status_code != 200:
+        print(f"Failed to retrieve UUID for username {username}. Error {mojang_data.status_code}.")
         return
 
-    uuid = ashcon_json.get('uuid')
+    mojang_json = mojang_data.json()
+    uuid = mojang_json.get('id')
+
+    if uuid is None:
+        print(f"UUID not found for username {username}.")
+        return
+
+    return uuid
+
+def get_hypixel_data(username):
+    # Contact the Ashcon API to get the UUID from the username
+    # ashcon_url = f'https://api.ashcon.app/mojang/v2/user/{username}'
+    # ashcon_data = requests.get(ashcon_url)
+    # ashcon_json = ashcon_data.json()
+    uuid = get_mojang_uuid(username)
+
     if uuid is None:
         print(f"UUID not found for username {username}.")
         return
