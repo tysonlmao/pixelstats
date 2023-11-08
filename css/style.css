@@ -8,10 +8,13 @@ html {
 }
 
 body {
+  background-image: url("../public/pexels-francesco-ungaro-998641.jpg") !important;
   background-color: #001c30;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0 auto;
+  background-size: cover;
+  background-attachment: fixed; /* Add this line */
 }
 
 h1,
@@ -24,13 +27,19 @@ p {
   color: #f4eee0;
 }
 
+.fs-1 {
+  font-family: "VCR OSD Mono", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  font-size: 64px !important;
+  color: #D0A2F7;
+}
+
 footer > * {
   color: white;
   font-family: "Roboto Mono";
 }
 
 nav {
-  background-color: #001c30;
   width: 100%;
   position: fixed;
   top: 0;
@@ -42,17 +51,37 @@ nav {
 
 nav a {
   color: white;
-  text-decoration: none;
   margin-right: 0.5rem;
 }
 
 a {
-  color: white;
+  text-decoration: none !important;
+}
+
+.navbar-brand {
+  font-family: "VCR OSD Mono";
+  text-transform: uppercase;
+  color: #D0A2F7 !important;
+  font-size: 40px;
+}
+
+.navbar-brand > a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+a {
+  color: #D0A2F7 !important;
+  text-decoration: none;
+  font-family: "Roboto Mono";
+}
+
+.btn-link {
+  text-decoration: none;
+  font-family: "Roboto Mono" !important;
+}
+
+.btn-nav {
+  font-size: 20px;
 }
 
 .box {
@@ -101,11 +130,6 @@ a:hover {
 .form-control:focus {
   box-shadow: 0 0 10px 1.5px #362FD9;
   border: 3px solid #362FD9;
-}
-
-/* Customize the modal's background */
-.modal-content {
-    background-color: #333; /* Change this to your preferred dark color */
 }
 
 .switcher {
@@ -178,3 +202,23 @@ a:hover {
   margin: 0 auto;
 }
 
+
+/* Limit the max height of the image container to 300px */
+.embed-responsive-16by9 {
+  max-height: 300px;
+}
+
+/* Style the image to maintain its aspect ratio */
+.embed-responsive-item {
+  width: 100%;
+  height: 100%;
+  max-height: 300px;
+  object-fit: cover; /* This ensures the image covers the entire container while maintaining its aspect ratio */
+}
+
+
+/* article post content */
+.article-post {
+  border: 3px solid #D0A2F7;
+  padding: 1rem;
+}
