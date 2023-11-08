@@ -50,6 +50,13 @@ $users = $stmt->fetchAll();
             <h2 class="header-text animate__animated animate__fadeIn">Admin</h2>
         </div>
     </header>
+    <?php
+    if (isset($_GET['delete']) && $_GET['delete'] == 'success') :
+    ?>
+        <div class="alert alert-danger">Successfully deleted user id <?php echo $_GET['id'] ?></div>
+    <?php
+    endif;
+    ?>
 
     <main>
         <!-- tabs here -->
@@ -65,7 +72,6 @@ $users = $stmt->fetchAll();
                     </div>
                 </div>
                 <i class="mt-3"></i>
-                <!-- Add the jQuery code here -->
                 <script>
                     $(document).ready(function() {
                         // Store the original table data
@@ -182,49 +188,8 @@ $users = $stmt->fetchAll();
                 }
             });
         });
-        // Function to handle termination
-        function terminateUser(userId) {
-            $.ajax({
-                type: "POST",
-                url: "./includes/terminate.inc.php",
-                data: {
-                    user_id: userId
-                },
-                success: function(response) {
-                    // Handle the response from the server
-                    if (response === "User terminated successfully.") {
-                        // Reload the page or update the user list as needed
-                        location.reload();
-                    } else {
-                        // Handle errors or display a message to the user
-                        console.log("Error: " + response);
-                    }
-                }
-            });
-        }
-
-        // Add a click event handler for the "Terminate" links
-        $('.terminate-link').click(function() {
-            var userId = $(this).data('user-id');
-            if (confirm("Are you sure you want to terminate this user?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "./inc/terminate.inc.php", // Update the URL to match the correct path
-                    data: {
-                        user_id: userId
-                    },
-                    success: function(response) {
-                        alert("User terminated successfully.");
-                        location.reload(); // Reload the page to update the user list
-                    },
-                    error: function(xhr, status, error) {
-                        alert("An error occurred while terminating the user.\nStatus: " + status + "\nError: " + error);
-                    }
-                });
-            }
-        });
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -123,13 +123,13 @@ a {
 /* form controls */
 .form-control {
   background-color: unset !important;
-  border: 3px solid #D0A2F7;
+  border: 3px solid #362FD9;
   color: white !important;
 }
 
 .form-control:focus {
-  box-shadow: 0 0 10px 1.5px #D0A2F7;
-  border: 3px solid #D0A2F7;
+  box-shadow: 0 0 10px 1.5px #362FD9;
+  border: 3px solid #362FD9;
 }
 
 .switcher {
