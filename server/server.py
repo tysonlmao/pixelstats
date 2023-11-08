@@ -39,10 +39,6 @@ def get_mojang_uuid(username):
     return uuid
 
 def get_hypixel_data(username):
-    # Contact the Ashcon API to get the UUID from the username
-    # ashcon_url = f'https://api.ashcon.app/mojang/v2/user/{username}'
-    # ashcon_data = requests.get(ashcon_url)
-    # ashcon_json = ashcon_data.json()
     uuid = get_mojang_uuid(username)
 
     if uuid is None:

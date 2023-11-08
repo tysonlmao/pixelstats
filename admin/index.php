@@ -162,7 +162,7 @@ $users = $stmt->fetchAll();
                             '<td><?= $user['user_role'] ?></td>' +
                             '<td>' +
                             '<span class="manage-link" data-user-id="<?= $user['id'] ?>">Manage</span> | ' +
-                            '<span class="terminate-link" data-user-id="<?= $user['id'] ?>">Terminate</span>' +
+                            '<a class="terminate-link" data-user-id="<?= $user['id'] ?>" href="../includes/terminate.inc.php?id=<?= $user['id'] ?>">Terminate</a>' +
                             '</td>' +
                             '</tr>'
                         );

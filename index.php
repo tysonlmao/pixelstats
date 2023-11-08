@@ -18,45 +18,7 @@ session_start();
 <body>
     <?php include "./templates/header.php" ?>
     <main class="content">
-        <div class="container">
-            <div class="container">
-                <h2>Welcome to Pixelstats</h2>
-                <p>This site is in heavy development.</p>
-                <?php
-                if (isset($_GET['player']) && !empty($_GET['player'])) :
-                    // Retrieve the username from the URL
-                    $username = $_GET['player'];
 
-                    $apiUrl = "https://api.pixelstats.app/requests?uuid=" . $username;
-                    $ch = curl_init($apiUrl);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    $res = curl_exec($ch);
-
-                    if ($res === false) :
-                        echo '<div class="alert alert-danger">cURL Error: ' . curl_error($ch) . '</div>';
-                    else :
-                        $data = json_decode($res, true);
-                    endif;
-
-                    curl_close($ch);
-                else :
-                endif;
-                ?>
-                <div class="row">
-                    <div class="col-md-6">
-                        <form action="profile.php" method="get">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Search by username</label>
-                                <input type="text" class="form-control" id="username" name="player" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
     </main>
     <?php include "./templates/footer.php" ?>
 </body>
