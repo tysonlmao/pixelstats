@@ -100,7 +100,9 @@ if ($res === false) {
                                 </div>
                                 <div class="col-md-4">
                                     <h3 class="stat-title">Level</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['experience'] ?></p>
+                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['Experience'] ?></p>
+                                    <h3 class="stat-title">Coins</h3>
+                                    <p class="stat"><?php echo number_format($data['player']['stats']['Bedwars']['coins']) ?></p>
                                 </div>
                             </div>
 
