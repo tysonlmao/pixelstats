@@ -70,18 +70,18 @@ if (isset($_GET['player'])) {
     <nav class="navbar navbar-expand-lg content">
         <div class="container-fluid">
             <a class="navbar-brand" href="/index.php">pixelstats</a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-link btn-nav" href="/posts.php">feed</a>
+                    <a class="btn btn-link btn-nav" href="/login.php">login</a>
+                </li>
+            </ul>
             <ul class="navbar-nav justify-content-end">
                 <form action="profile.php" method="get" class="mb-0">
                     <div class="align-items-center">
                         <input type="text" class="form-control" id="username" name="player" required>
                     </div>
                 </form>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="btn btn-link btn-nav" href="/posts.php">feed</a>
-                    <a class="btn btn-link btn-nav" href="/login.php">login</a>
-                </li>
             </ul>
         </div>
     </nav>

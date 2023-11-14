@@ -15,7 +15,7 @@ session_start();
     <link rel="stylesheet" href="./css/fonts.css">
 </head>
 
-<body>
+<body class="has-image-background">
     <?php include "./templates/header.php" ?>
     <main class="content">
 

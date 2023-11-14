@@ -12,3 +12,8 @@
     font-family: "Lora";
     src: url("../public/fonts/Lora-VariableFont_wght.woff2");
 }
+
+@font-face {
+    font-family: "Minecraftia";
+    src: url("../public/fonts/Minecraftia-Regular.ttf");
+}

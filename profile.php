@@ -49,108 +49,61 @@ if ($res === false) {
 <body class="profile content">
     <!-- Include your header content here -->
     <?php include "./templates/header.php" ?>
-    <div class="row px-2">
-        <div class="col-md-6"></div>
-        <div class="col-md-6">
-            <form action="profile.php" method="get">
-                <div class="mb-3">
-                    <p class="text-end mb-2">Search for a user</p>
-                    <input type=" text" class="form-control" id="username" name="player" required>
-                </div>
-                <button type="submit" class="btn btn-primary d-none">Submit</button>
-            </form>
-        </div>
-    </div>
     <main>
         <div class="container">
+            <h2 class="fs-1 text-center mb-3 mt-3"><?php echo $data['player']['displayname'] ?></h2>
             <div class="row">
-                <div class="col-md-4">
-                    <!-- Sidebar for general player statistics -->
-                    <div class="box sidebar" style="background-color: rgba(54, 47, 217, 0.3);">
-                        <div class="box-no-border text-end">
-                            <h2 class="stat-t">Player</h2>
-                            <h2 class="stat-v text-uppercase">
-                                <?php echo $data['player']['displayname']; ?>
-                            </h2>
-                            <h3 class="stat-t">Network Level</h3>
-                            <p class="stat-v">
-                                <?php if (isset($data['player']['networkExp'])) : ?>
-                                    <?php echo number_format((sqrt(2 * $data['player']['networkExp'] + 30625) / 50) - 2.5, 2); ?>
-                                <?php else : ?>
-                                    Unknown
-                                <?php endif; ?>
-                            </p>
-                            <h3 class="stat-t">Achievement Points</h3>
-                            <p class="stat-v">
-                                <?php if (isset($data['player']['achievementPoints'])) : ?>
-                                    <?php echo $data['player']['achievementPoints']; ?>
-                                <?php else : ?>
-                                    Unknown
-                                <?php endif; ?>
-                            </p>
-                            <h3 class="stat-t">First login</h3>
-                            <p class="stat-v">
-                                <?php if (isset($data['player']['firstLogin'])) : ?>
-                                    <?php echo date("Y-m-d", (int)($data['player']['firstLogin'] / 1000)); ?>
-                                <?php else : ?>
-                                    Unknown
-                                <?php endif; ?>
-                            </p>
-                            <h3 class="stat-t">Last login</h3>
-                            <p class="stat-v">
-                                <?php if (isset($data['player']['lastLogin'])) : ?>
-                                    <?php echo date("Y-m-d", (int)($data['player']['lastLogin'] / 1000)); ?>
-                                <?php else : ?>
-                                    Hidden
-                                <?php endif; ?>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
+                <div>
                     <!-- Content for the specified player's account goes here -->
-                    <div class="box" style="background-color: rgb(208, 20, 127, 0.3); border: 3px solid rgb(208, 20, 127); box-shadow: 0 0 10px 1.5px #d0147f">
+                    <div class="box box-stats">
                         <a data-toggle="collapse" href="#bedWarsAccordion" role="button" aria-expanded="false" aria-controls="bedWarsAccordion">
                             <h3 class="accord-button">BedWars</h3>
                         </a>
                         <div class="collapse" id="bedWarsAccordion">
                             <!-- Content for BedWars goes here -->
-                            <div class="row align-items-center">
-                                <div class="stat mb-4"><?php echo $data['player']['stats']['Bedwars']['Experience'] ?></div>
-                                <div class="col-md-3">
-                                    <h3 class="stat-title">FINALS</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_kills_bedwars'] ?></p>
-                                    <h3 class="stat-title">DEATHS</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_deaths_bedwars'] ?></p>
-                                    <h3 class="stat-title">FKDR</h3>
-                                    <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['final_kills_bedwars'] / $data['player']['stats']['Bedwars']['final_deaths_bedwars']), 2) ?></h3>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">FINALS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_kills_bedwars'] ?></p>
+                                            <h3 class="stat-title">DEATHS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['final_deaths_bedwars'] ?></p>
+                                            <h3 class="stat-title">FKDR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['final_kills_bedwars'] / $data['player']['stats']['Bedwars']['final_deaths_bedwars']), 2) ?></h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">BEDS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['beds_broken_bedwars'] ?></p>
+                                            <h3 class="stat-title">BEDS LOST</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['beds_lost_bedwars'] ?></p>
+                                            <h3 class="stat-title">BBLR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['beds_broken_bedwars'] / $data['player']['stats']['Bedwars']['beds_lost_bedwars']), 2) ?></h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">KILLS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['kills_bedwars'] ?></p>
+                                            <h3 class="stat-title">DEATHS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['deaths_bedwars'] ?></p>
+                                            <h3 class="stat-title">KDR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['kills_bedwars'] / $data['player']['stats']['Bedwars']['deaths_bedwars']), 2) ?></h3>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h3 class="stat-title">WINS</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['wins_bedwars'] ?></p>
+                                            <h3 class="stat-title">LOSSES</h3>
+                                            <p class="stat"><?php echo $data['player']['stats']['Bedwars']['losses_bedwars'] ?></p>
+                                            <h3 class="stat-title">WLR</h3>
+                                            <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['wins_bedwars'] / $data['player']['stats']['Bedwars']['losses_bedwars']), 2) ?></h3>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <h3 class="stat-title">BEDS</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['beds_broken_bedwars'] ?></p>
-                                    <h3 class="stat-title">BEDS LOST</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['beds_lost_bedwars'] ?></p>
-                                    <h3 class="stat-title">BBLR</h3>
-                                    <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['beds_broken_bedwars'] / $data['player']['stats']['Bedwars']['beds_lost_bedwars']), 2) ?></h3>
-                                </div>
-                                <div class="col-md-3">
-                                    <h3 class="stat-title">KILLS</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['kills_bedwars'] ?></p>
-                                    <h3 class="stat-title">DEATHS</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['deaths_bedwars'] ?></p>
-                                    <h3 class="stat-title">KDR</h3>
-                                    <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['kills_bedwars'] / $data['player']['stats']['Bedwars']['deaths_bedwars']), 2) ?></h3>
-                                </div>
-                                <div class="col-md-3">
-                                    <h3 class="stat-title">WINS</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['wins_bedwars'] ?></p>
-                                    <h3 class="stat-title">LOSSES</h3>
-                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['losses_bedwars'] ?></p>
-                                    <h3 class="stat-title">WLR</h3>
-                                    <h3 class="stat"><?php echo number_format(($data['player']['stats']['Bedwars']['wins_bedwars'] / $data['player']['stats']['Bedwars']['losses_bedwars']), 2) ?></h3>
+                                <div class="col-md-4">
+                                    <h3 class="stat-title">Level</h3>
+                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['experience'] ?></p>
                                 </div>
                             </div>
+
                             <div class="container">
                                 <table class="table table-dark table-hover mt-3">
                                     <thead>
@@ -226,7 +179,7 @@ if ($res === false) {
                         </div>
                     </div>
 
-                    <div class="box" style="background-color: rgb(152, 72, 145, 0.3); border: 3px solid rgb(152, 72, 145); box-shadow: 0 0 10px 1.5px #984891">
+                    <div class="box box-stats">
                         <a data-toggle="collapse" href="#duelsAccordion" role="button" aria-expanded="false" aria-controls="duelsAccordion" class="accord-button">
                             <h3 class="accord-button">Duels</h3>
                         </a>
@@ -253,7 +206,7 @@ if ($res === false) {
                         </div>
                     </div>
 
-                    <div class="box" style="background-color: rgb(8, 52, 164, 0.3); border: 3px solid rgb(8, 52, 164); box-shadow: 0 0 10px 1.5px #0834a4">
+                    <div class="box box-stats">
                         <a data-toggle="collapse" href="#skyWarsAccordion" role="button" aria-expanded="false" aria-controls="skyWarsAccordion" class="accord-button">
                             <?php
                             /**
@@ -274,6 +227,7 @@ if ($res === false) {
     <!-- Include your footer content here -->
     <?php include "./templates/footer.php" ?>
 
+    </script>
     <!-- Include Bootstrap JS and other scripts here -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
