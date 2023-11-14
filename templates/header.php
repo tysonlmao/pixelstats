@@ -86,8 +86,3 @@ if (isset($_GET['player'])) {
         </div>
     </nav>
 <?php endif; ?>
-
-
-
-
-</nav>

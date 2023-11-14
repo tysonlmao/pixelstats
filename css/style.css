@@ -16,8 +16,9 @@ body {
 
 .has-image-background {
   background-size: cover;
+  background-position: center;
   background-attachment: fixed; /* Add this line */
-  background-image: url("../public/pexels-francesco-ungaro-998641.jpg") !important;
+  background-image: url("../public/pexels-pixabay-33688.jpg") !important;
 }
 
 h1,

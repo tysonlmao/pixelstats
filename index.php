@@ -13,12 +13,13 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/animate.css">
 </head>
 
 <body class="has-image-background">
     <?php include "./templates/header.php" ?>
     <main class="content">
-
+        <div></div>
     </main>
     <?php include "./templates/footer.php" ?>
 </body>
