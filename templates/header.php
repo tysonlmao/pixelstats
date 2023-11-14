@@ -76,13 +76,12 @@ if (isset($_GET['player'])) {
                     <a class="btn btn-link btn-nav" href="/login.php">login</a>
                 </li>
             </ul>
-            <ul class="navbar-nav justify-content-end">
-                <form action="profile.php" method="get" class="mb-0">
-                    <div class="align-items-center">
-                        <input type="text" class="form-control f-c-s" id="username" name="player" required placeholder="search">
-                    </div>
-                </form>
-            </ul>
+            <form action="profile.php" method="get" class="mb-0 form-inline justify-content-end">
+                <div class="align-items-center">
+                    <input type="text" class="form-control f-c-s" id="username" name="player" required placeholder="search">
+                </div>
+            </form>
         </div>
     </nav>
+
 <?php endif; ?>
