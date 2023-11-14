@@ -101,6 +101,7 @@ a {
   margin-top: 1rem;
   padding: 1.5rem;
   border-radius: 10px;
+  border: 3px solid #D0A2F7;
 }
 
 .box-stats {
@@ -143,13 +144,22 @@ a {
 /* form controls */
 .form-control {
   background-color: unset !important;
-  border: 3px solid #362FD9;
+  border: 3px solid #D0A2F7;
   color: white !important;
 }
 
+.form-control::placeholder {
+  color: #D0A2F7;
+}
+
+.f-c-s {
+  font-family: "VCR OSD Mono";
+  text-align: end;
+}
+
 .form-control:focus {
-  box-shadow: 0 0 10px 1.5px #362FD9;
-  border: 3px solid #362FD9;
+  box-shadow: 0 0 10px 1.5px #D0A2F7;
+  border: 3px solid #D0A2F7;
 }
 
 .switcher {

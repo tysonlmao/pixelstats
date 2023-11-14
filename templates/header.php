@@ -79,7 +79,7 @@ if (isset($_GET['player'])) {
             <ul class="navbar-nav justify-content-end">
                 <form action="profile.php" method="get" class="mb-0">
                     <div class="align-items-center">
-                        <input type="text" class="form-control" id="username" name="player" required>
+                        <input type="text" class="form-control f-c-s" id="username" name="player" required placeholder="search">
                     </div>
                 </form>
             </ul>

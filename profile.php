@@ -51,7 +51,21 @@ if ($res === false) {
     <?php include "./templates/header.php" ?>
     <main>
         <div class="container">
-            <h2 class="fs-1 text-center mb-3 mt-3"><?php echo $data['player']['displayname'] ?></h2>
+            <div class="row align-items-center box-no-border">
+                <h2 class="fs-1 text-center mb-3 mt-3"><?php echo $data['player']['displayname'] ?></h2>
+                <div class="col-md-4">
+                    <h3 class="stat-title">Level</h3>
+                    <p class="stat"><?php echo number_format((sqrt(2 * $data['player']['networkExp'] + 30625) / 50) - 2.5, 2); ?></p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="stat-title">Karma</h3>
+                    <p class="stat"><?php echo number_format($data['player']['karma']) ?></p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="stat-title">AP</h3>
+                    <p class="stat"><?php echo number_format($data['player']['achievementPoints']) ?></p>
+                </div>
+            </div>
             <div class="row">
                 <div>
                     <!-- Content for the specified player's account goes here -->
@@ -103,6 +117,8 @@ if ($res === false) {
                                     <p class="stat"><?php echo $data['player']['stats']['Bedwars']['Experience'] ?></p>
                                     <h3 class="stat-title">Coins</h3>
                                     <p class="stat"><?php echo number_format($data['player']['stats']['Bedwars']['coins']) ?></p>
+                                    <h3 class="stat-title">Kills</h3>
+                                    <p class="stat"><?php echo $data['player']['stats']['Bedwars']['kills_bedwars'] ?></p>
                                 </div>
                             </div>
 
@@ -205,6 +221,26 @@ if ($res === false) {
                                     <h3 class="stat"><?php echo number_format(($data['player']['stats']['Duels']['kills'] / $data['player']['stats']['Duels']['deaths']), 2) ?></h3>
                                 </div>
                             </div>
+
+                            <table class="table table-dark table-hover mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Wins</th>
+                                        <th>Losses</th>
+                                        <th>WLR</th>
+                                        <th>Kills</th>
+                                        <th>Deaths</th>
+                                        <th>KDR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Skywars</th>
+                                        <th><?php echo $data['player']['stats']['Duels']['sw_duel_wins'] + $data['player']['stats']['Duels']['sw_doubles_wins'] ?></th>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
