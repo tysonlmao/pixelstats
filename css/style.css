@@ -1,10 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
 * {
   color: #f4eee0;
 }
@@ -36,6 +29,14 @@ h6,
 p {
   margin: 0;
   color: #f4eee0;
+}
+
+input {
+  color: black !important;
+}
+
+textarea {
+  color: black !important;
 }
 
 .fs-1 {
@@ -292,3 +293,8 @@ a {
   border: 3px solid #D0A2F7;
   padding: 1rem;
 }
+.flexbox {
+  display: flex;
+}
+
+

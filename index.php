@@ -19,7 +19,7 @@ session_start();
 <body class="has-image-background">
     <?php include "./templates/header.php" ?>
     <main class="content">
-        <div></div>
+        <div class=""></div>
     </main>
     <?php include "./templates/footer.php" ?>
 </body>

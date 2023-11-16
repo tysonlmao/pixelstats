@@ -14,7 +14,7 @@
                     if (!empty($commitHash)) {
                         echo '<a href="https://github.com/tysonlmao/pixelstats/commit/' . $commitHash . '">' . $commitHash . '</a>';
                     } else {
-                        echo '<a href="https://github.com/tysonlmao/pixelstats">View source</a>';
+                        echo '<a href="https://github.com/tysonlmao/pixelstats" target="_blank">View source</a>';
                     }
                     ?>
                 </p>
