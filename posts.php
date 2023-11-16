@@ -4,7 +4,7 @@ session_start();
 include "./includes/connection.inc.php";
 
 // Query to retrieve post data from the database
-$sql = "SELECT main_account, imageUrl, commentText, timestamp FROM posts ORDER BY timestamp DESC";
+$sql = "SELECT id, main_account, imageUrl, commentText, timestamp FROM posts ORDER BY timestamp DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,8 +27,17 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <body>
         <?php include "./templates/header.php" ?>
         <main class="content">
-            <div class="box-no-border text-center">
-                <h2 class="fs-1">Latest Posts</h2>
+            <h2 class="fs-1 text-center mb-5">Latest Posts</h2>
+            <div class="article-post mb-5">
+                <form action="./includes/create_post.inc.php" method="post" enctype="multipart/form-data">
+
+                    <label for="comment">Comment:</label><br>
+                    <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+
+                    <label for="image">Upload Image:</label><br>
+                    <input type="file" id="image" name="image" accept="image/*" required><br><br>
+                    <input type="submit" name="post-submit" value="Create Post">
+                </form>
             </div>
             <style>
                 h3 {
@@ -69,10 +78,24 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class="col-md-6">
                             <div class="embed-responsive embed-responsive-16by9" style="max-height: 300px;">
-                                <img src="<?php echo $post['imageUrl']; ?>" alt="Your Image" class="embed-responsive-item">
+                                <a href="<?php echo $post['imageUrl'] ?>" target="_blank">
+                                    <img src="<?php echo $post['imageUrl']; ?>" alt="Your Image" class="embed-responsive-item">
+                                </a>
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex">
+                        <form action="editpost.php" method="get">
+                            <input type="hidden" name="post_id" value='<?php echo $post['id']; ?>'>
+                            <button type="submit" class="btn btn-primary">Edit post</button>
+                        </form>
+                        <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'Admin') : ?>
+                            <form action="./includes/delete_post.inc.php" method="post">
+                                <input type="hidden" name="post_id" value='<?php echo $post['id']; ?>'>
+                                <button type="submit" name="erase-post" class="btn btn-danger mx-2">Erase Post</button>
+                            </form>
+                    </div>
+                <?php endif; ?>
                 </article>
             <?php endforeach; ?>
         </main>

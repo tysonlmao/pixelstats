@@ -25,7 +25,7 @@ if (isset($_GET['player'])) {
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="btn btn-link btn-nav" href="/posts.php">post</a>
+                    <a class="btn btn-link btn-nav" href="/posts.php">feed</a>
                 </li>
                 <ul class="navbar-nav justify-content-end mx-3">
                     <form action="profile.php" method="get" class="mb-0">
@@ -70,24 +70,20 @@ if (isset($_GET['player'])) {
     <nav class="navbar navbar-expand-lg content">
         <div class="container-fluid">
             <a class="navbar-brand" href="/index.php">pixelstats</a>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="btn btn-link btn-nav" href="/posts.php">feed</a>
-                    <a class="btn btn-link btn-nav" href="/login.php">login</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav justify-content-end">
-                <form action="profile.php" method="get" class="mb-0">
+            <div class="flexbox">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-link btn-nav" href="/posts.php">feed</a>
+                        <a class="btn btn-link btn-nav" href="/login.php">login</a>
+                    </li>
+                </ul>
+                <form action="profile.php" method="get" class="mb-0 form-inline justify-content-end">
                     <div class="align-items-center">
                         <input type="text" class="form-control f-c-s" id="username" name="player" required placeholder="search">
                     </div>
                 </form>
-            </ul>
+            </div>
         </div>
     </nav>
+
 <?php endif; ?>
-
-
-
-
-</nav>

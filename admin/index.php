@@ -147,15 +147,11 @@ $users = $stmt->fetchAll();
             // Store the original table data
             var originalTableData = $('.content').html();
 
-            // Add an event listener to the search input
             $('#site-search').on('input', function() {
-                // Get the search input value
                 var searchValue = $(this).val().toLowerCase();
 
-                // Initialize an empty array to store filtered results
                 var filteredResults = [];
 
-                // Loop through the users and find matches
                 <?php foreach ($users as $user) : ?>
                     var username = '<?= strtolower($user['username']) ?>';
                     if (username.includes(searchValue)) {
