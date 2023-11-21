@@ -22,35 +22,6 @@
     </header>
     <main class="animate__animated animate__fadeInUp">
         <div class="box px-3">
-            <?php
-            if (isset($_GET['error'])) :
-                if ($_GET['error'] == 'emptyFields') :
-                    $message = "Please fill in all the fields";
-                    echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
-                elseif ($_GET['error'] == 'invalidUsername') :
-                    $message = "Please enter a valid username";
-                    echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
-                elseif ($_GET['error'] == 'invalidEmail') :
-                    $message = "Please enter a valid email address";
-                    echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
-                elseif ($_GET['error'] == 'passwordMismatch') :
-                    $message = "Passwords entered do not match. Please try again";
-                    echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
-                elseif ($_GET['error'] == 'usernameTaken') :
-                    $message = "That username is taken, please try again";
-                    echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
-                elseif ($_GET['error'] == 'emailTaken') :
-                    $message = "This email address is already in use.";
-                    echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
-                elseif ($_GET['error'] == 'sqlerror') :
-                    $message = "Error occurred on the server. Please contact the system administrator";
-                    echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
-                elseif ($_GET['error'] == 'success') :
-                    $message = 'Registration successful. <a href="/login.php">Login here</a>';
-                    echo '<div class="alert alert-success content" role="alert">' . $message . '</div>';
-                endif;
-            endif;
-            ?>
             <form action="./includes/signup.inc.php" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
