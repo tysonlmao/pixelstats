@@ -37,3 +37,4 @@ if (isset($_GET['id'])) {
     // Handle invalid or missing user ID
     echo "Invalid or missing user ID.";
 }
+ 

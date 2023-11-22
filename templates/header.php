@@ -85,5 +85,50 @@ if (isset($_GET['player'])) {
             </div>
         </div>
     </nav>
-
 <?php endif; ?>
+<div class="content">
+    <?php
+    if (isset($_GET['error'])) :
+        if ($_GET['error'] == 'emptyFields') :
+            $message = "Please fill in all the fields";
+            echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+        elseif ($_GET['error'] == 'invalidUsername') :
+            $message = "Please enter a valid username";
+            echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+        elseif ($_GET['error'] == 'invalidEmail') :
+            $message = "Please enter a valid email address";
+            echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+        elseif ($_GET['error'] == 'passwordMismatch') :
+            $message = "Passwords entered do not match. Please try again";
+            echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+        elseif ($_GET['error'] == 'usernameTaken') :
+            $message = "That username is taken, please try again";
+            echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+        elseif ($_GET['error'] == 'emailTaken') :
+            $message = "This email address is already in use.";
+            echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+        elseif ($_GET['error'] == 'sqlerror') :
+            $message = "Error occurred on the server. Please contact the system administrator";
+            echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+        elseif ($_GET['error'] == 'databaseerror') :
+            $message = 'Database connection error. Please contact the <a href="mailto:tyson@tysonlmao.dev">webmaster</a>';
+            echo '<div class="alert alert-danger content" role="alert">' . $message . '</div>';
+        elseif ($_GET['error'] == 'emailPasswordInvalid' || $_GET['error'] == 'emptyFields') :
+            $message = 'Invalid email or password';
+            echo '<div class="alert alert-danger content">' . $message . '</div>';
+        endif;
+        if (isset($_GET['success'])) :
+            if ($_GET['error'] == 'success') :
+                $message = 'Registration successful. <a href="/login.php">Login here</a>';
+                echo '<div class="alert alert-success content" role="alert">' . $message . '</div>';
+            elseif ($_GET['success'] == 'posted') :
+                $message = 'Posted successfully';
+                echo '<div class="alert alert-success content">' . $message . '</div>';
+            elseif ($_GET['success'] == 'postdeleted') :
+                $message = 'Post deleted successfully';
+                echo '<div class="alert alert-success content">' . $message . '</div>';
+            endif;
+        endif;
+    endif;
+    ?>
+</div>

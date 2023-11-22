@@ -44,7 +44,6 @@ else :
         header("Location: ../register.php?error=emailTaken&username=$username&email=$email");
     else :
 
-        // All checks passed, proceed to register the user in the users table
         $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
         $stmt = $pdo->prepare($sql);
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
